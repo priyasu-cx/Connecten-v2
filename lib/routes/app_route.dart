@@ -3,6 +3,8 @@ import 'package:hacknitr_round2/LoginScreen/login_screen.dart';
 import 'package:hacknitr_round2/SplashScreen/splash_screen.dart';
 import 'package:hacknitr_round2/routes/route_path.dart';
 
+import '../ProfileScreen/profile_screen.dart';
+
 abstract class AppRoute {
   static Route<dynamic> generateRoute(RouteSettings settings) {
     Widget currentWidget;
@@ -15,6 +17,10 @@ abstract class AppRoute {
 
       case RoutePath.routeToLoginScreen:
         currentWidget = const LoginScreen();
+        break;
+
+      case RoutePath.routeToProfileScreen:
+        currentWidget = const ProfileScreen();
         break;
 
       default:
