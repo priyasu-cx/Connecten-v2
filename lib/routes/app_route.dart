@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:hacknitr_round2/LoginScreen/login_screen.dart';
+import 'package:hacknitr_round2/SplashScreen/splash_screen.dart';
 import 'package:hacknitr_round2/routes/route_path.dart';
 
 abstract class AppRoute {
@@ -8,9 +10,11 @@ abstract class AppRoute {
     switch (settings.name) {
       case RoutePath.routeInitial:
       case RoutePath.routeToSplashScreen:
-        // currentWidget = const SplashScreen();
-        // Change with screen
-        currentWidget = Container();
+        currentWidget = const SplashScreen();
+        break;
+
+      case RoutePath.routeToLoginScreen:
+        currentWidget = const LoginScreen();
         break;
 
       default:

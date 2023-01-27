@@ -1,7 +1,8 @@
 import 'dart:async';
-
 import 'package:flutter/material.dart';
 import 'package:hacknitr_round2/routes/route_path.dart';
+import 'package:hacknitr_round2/utils/assets.dart';
+import 'package:hacknitr_round2/utils/size_config.dart';
 
 class SplashScreen extends StatefulWidget {
   const SplashScreen({super.key});
@@ -32,9 +33,9 @@ class _SplashScreenState extends State<SplashScreen> {
       body: SafeArea(
           child: Center(
         child: Image.asset(
-          Config.app_animation,
-          width: _width * 0.5,
-          height: _width * 0.5,
+          ImageAsset.splashScreenGif,
+          width: screenWidth! * 0.5,
+          height: screenHeight! * 0.5,
         ),
       )),
     );
