@@ -117,8 +117,7 @@ class _NearbyConnectState extends ConsumerState<NearbyConnect> {
                         itemBuilder: (context, i) {
                           //return Connect(userdata["fullname"], userdata["designation"]);
 
-                          return Connect(nearbyUsers[i], nearbyUsers[i].name,
-                              nearbyUsers[i].designation, context);
+                          return Connect(user: nearbyUsers[i], name: nearbyUsers[i].name, designation: nearbyUsers[i].designation!);
                         })),
               ),
             ],
@@ -132,7 +131,7 @@ class Connect extends ConsumerWidget {
   final String name;
   final String designation;
   
-  const Connect(UserModel nearbyUser, {
+  const Connect({
     Key? key,
     required this.user,
     required this.name,
