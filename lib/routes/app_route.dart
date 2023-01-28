@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:hacknitr_round2/Handler/auth_handler.dart';
+import 'package:hacknitr_round2/NearbyConnectScreen/nearby_connect.dart';
 import 'package:hacknitr_round2/ProfileScreen/profile_screen.dart';
 import 'package:hacknitr_round2/SplashScreen/splash_screen.dart';
 import 'package:hacknitr_round2/routes/route_path.dart';
@@ -24,6 +25,10 @@ abstract class AppRoute {
 
       case RoutePath.routeToForceProfileScreen:
         currentWidget = const ProfileScreen();
+        break;
+
+      case RoutePath.routeToNearbyScreen:
+        currentWidget = const NearbyConnect();
         break;
 
       default:
