@@ -1,8 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:nearby_connections/nearby_connections.dart';
-import 'package:toast/toast.dart';
-
 
 class ConnectionProvider extends ChangeNotifier {
   final Strategy strategy = Strategy.P2P_STAR;
@@ -43,10 +42,12 @@ class ConnectionProvider extends ChangeNotifier {
             _connections.add(name);
           }
           // Get.snackbar("New Connection Found", "");
-          Toast.show("New Connection Found",
-              duration: Toast.lengthShort, gravity: Toast.bottom);
-        },
 
+          // TODO: Add Toast for New Connection Found
+          //
+          // Toast.show("New Connection Found",
+          //     duration: Toast.lengthShort, gravity: Toast.bottom);
+        },
         onEndpointLost: (id) {},
       );
     } catch (e) {
@@ -87,6 +88,13 @@ class ConnectionProvider extends ChangeNotifier {
     await Nearby().stopAdvertising();
     notifyListeners();
   }
+
+  final locationPermission = StateProvider<bool>((ref)  {
+    if (await Nearby().checkBluetoothPermission() == false) {
+      Nearby().askBluetoothPermission();
+    }
+
+  });
 
   Future getLocationPermission() async {
     if (await Nearby().checkLocationPermission() == false) {

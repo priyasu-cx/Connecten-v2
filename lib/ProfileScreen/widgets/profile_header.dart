@@ -16,14 +16,13 @@ class ProfileHeaderContainer extends ConsumerWidget {
         children: [
           SizedBox(
             height: screenWidth! * 0.28,
-
             child: Image.asset(ImageAsset.splashScreenGif),
           ),
           SizedBox(
             height: screenHeight! * 0.01,
           ),
           Text(
-            "_userDetails.name",
+            _userDetails.value!.name,
             // "hello",
             style: TextStyle(
               letterSpacing: 1,
@@ -35,7 +34,7 @@ class ProfileHeaderContainer extends ConsumerWidget {
             height: screenHeight! * 0.01,
           ),
           Text(
-            "_authUser.",
+            _userDetails.value!.designation!,
             // "designation",
             style: TextStyle(
               fontSize: 16,
@@ -46,7 +45,7 @@ class ProfileHeaderContainer extends ConsumerWidget {
             height: screenHeight! * 0.01,
           ),
           Text(
-            "bio",
+            _userDetails.value!.bio!,
             // "Bios",
             textAlign: TextAlign.center,
             style: TextStyle(
