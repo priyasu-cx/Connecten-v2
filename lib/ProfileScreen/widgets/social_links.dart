@@ -145,12 +145,4 @@ class social extends ConsumerWidget {
   }
 }
 
-class openDialog extends ConsumerWidget {
-  const openDialog({Key? key}) : super(key: key);
-
-  @override
-  Widget build(BuildContext context, WidgetRef ref) {
-    return const Placeholder();
-  }
-}
 
