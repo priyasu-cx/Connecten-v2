@@ -20,6 +20,11 @@ class DatabaseService {
         UserModel.fromMap(snapshot.data() as Map<String, dynamic>?));
   }
 
+  Stream<UserModel> userDetailsWithID(String ID) {
+    return _userCollection.doc(ID).snapshots().map((snapshot) =>
+        UserModel.fromMap(snapshot.data() as Map<String, dynamic>?));
+  }
+
   Future<bool> addUserData(UserModel userDetails) async {
     _userCollection
         .doc(userDetails.uid)

@@ -12,3 +12,8 @@ final checkUserExistsProvider =
 final userDetailsProvider = StreamProvider<UserModel>(((ref) {
   return ref.watch(databaseProvider).userDetails;
 }));
+
+final userDetailsWithIdProvider =
+    StreamProvider.family<UserModel, String>(((ref, id) {
+  return ref.watch(databaseProvider).userDetailsWithID(id);
+}));
