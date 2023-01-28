@@ -25,6 +25,28 @@ class DatabaseService {
         UserModel.fromMap(snapshot.data() as Map<String, dynamic>?));
   }
 
+  List<UserModel>? allConnectionDetails(List<String> nearbyUsers) {
+    List<UserModel> nearbyUserData = [];
+    nearbyUsers.forEach((element) {
+      _userCollection.doc(element).get().then((DocumentSnapshot snapshot) {
+        nearbyUserData
+            .add(UserModel.fromMap(snapshot.data() as Map<String, dynamic>?));
+      });
+    });
+    // for (var uid in nearbyUsers) {
+    //   var data = _userCollection.doc(uid).snapshots().map((snapshot) =>
+    //       UserModel.fromMap(snapshot.data() as Map<String, dynamic>?));
+
+    //   nearbyUserData.add(data);
+    // }
+    // nearbyUsers.forEach((element) {
+    //   // nearbyUserData.add();
+    //   UserModel data = _userCollection.doc(element).snapshots().map((snapshot) =>
+    //       UserModel.fromMap(snapshot.data() as Map<String, dynamic>?));
+    // });
+    return nearbyUserData;
+  }
+
   Future<bool> addUserData(UserModel userDetails) async {
     _userCollection
         .doc(userDetails.uid)
