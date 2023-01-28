@@ -5,6 +5,8 @@ import 'package:hacknitr_round2/utils/colors.dart';
 import 'package:hacknitr_round2/utils/size_config.dart';
 import 'package:sliding_switch/sliding_switch.dart';
 
+import '../widgets/drawer.dart';
+
 
 class ProfileScreen extends StatefulWidget {
   const ProfileScreen({Key? key}) : super(key: key);
@@ -38,7 +40,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
     // });
 
     return Scaffold(
-        // drawer: const Menu(),
+        drawer: const Menu(),
         appBar: AppBar(
           toolbarHeight: screenHeight! * 0.12,
           automaticallyImplyLeading: false,
