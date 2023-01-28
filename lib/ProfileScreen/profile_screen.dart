@@ -1,8 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:hacknitr_round2/ProfileScreen/widgets/profile_header.dart';
 import 'package:hacknitr_round2/ProfileScreen/widgets/social_cards.dart';
-import 'package:hacknitr_round2/ProfileScreen/widgets/social_links.dart';
-import 'package:hacknitr_round2/utils/assets.dart';
+import 'package:hacknitr_round2/ProfileScreen/widgets/toggle_button.dart';
 import 'package:hacknitr_round2/utils/colors.dart';
 import 'package:hacknitr_round2/utils/size_config.dart';
 import 'package:hacknitr_round2/widgets/appbar.dart';
@@ -38,41 +37,7 @@ class ProfileScreen extends StatelessWidget {
                 ),
                 child: Stack(
                   children: [
-                    Container(
-                      padding:
-                          EdgeInsets.symmetric(vertical: 20, horizontal: 20),
-                      alignment: Alignment.topRight,
-                      child: SlidingSwitch(
-                        value: false,
-                        width: 50,
-                        onChanged: (bool value) {
-                          /// TODO: Uncomment Required
-
-                          // if (value == true) {
-                          //   cp.enableAdvertising(sp.uid);
-                          //   cp.disableDiscovery();
-                          // } else {
-                          //   cp.disableAdvertising();
-                          //   cp.enableDiscovery(sp.uid, context);
-                          // }
-                        },
-                        height: 25,
-                        animationDuration: const Duration(milliseconds: 400),
-                        onTap: () {},
-                        onDoubleTap: () {},
-                        onSwipe: () {},
-                        textOff: "",
-                        textOn: "",
-                        contentSize: 17,
-
-                        /// TODO: Changes Required
-                        colorOn: const Color(0xff035e00),
-                        colorOff: const Color(0xfff00c0c),
-                        background: const Color(0xff25ff00),
-                        buttonColor: const Color(0xfff7f5f7),
-                        inactiveColor: const Color(0xff636f7b),
-                      ),
-                    ),
+                    const ToogleButton(),
 
                     //Stack 2
                     const ProfileHeaderWidget(),

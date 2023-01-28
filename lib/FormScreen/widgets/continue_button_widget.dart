@@ -36,6 +36,7 @@ class ContinueButtonWidget extends ConsumerWidget {
           if (nameController.text.isNotEmpty &&
               designationController.text.isNotEmpty &&
               bioController.text.isNotEmpty) {
+<<<<<<< HEAD
             UserModel userDetails = UserModel(
               uid: _authState.uid,
               name: nameController.text,
@@ -57,6 +58,29 @@ class ContinueButtonWidget extends ConsumerWidget {
                   context, RoutePath.routeToForceProfileScreen);
             }
           } else {
+=======
+          UserModel userDetails = UserModel(
+            uid: _authState.uid,
+            name: nameController.text,
+            designation: designationController.text,
+            bio: bioController.text,
+            email: _authState.email!,
+            imageURL: _authState.photoURL!,
+            connectedList: [],
+            github: "",
+            linkedin: "",
+            twitter: "",
+            portfolio: "",
+            isPrivate: false,
+            connectionCount: 0,
+          );
+          bool state = await _databaseService.addUserData(userDetails);
+          // print(state);
+          if (state) {
+            Navigator.pushReplacementNamed(
+                context, RoutePath.routeToForceProfileScreen);
+          }}else{
+>>>>>>> a5e44021a20051cfcb1eb4226b374eba1e15481b
             Fluttertoast.showToast(
                 msg: "Please fill all the fields",
                 toastLength: Toast.LENGTH_SHORT,

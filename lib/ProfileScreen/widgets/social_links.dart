@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:hacknitr_round2/Models/user_models.dart';
 import 'package:hacknitr_round2/utils/size_config.dart';
 
 Widget social(context, index, image, text, link) {
@@ -6,6 +7,7 @@ Widget social(context, index, image, text, link) {
     context: context,
     builder: (context) {
       // final sp = context.read<SignInProvider>();
+      // UserModel userdetails = UserModel();
       final myController = TextEditingController();
       return Dialog(
           shape: RoundedRectangleBorder(

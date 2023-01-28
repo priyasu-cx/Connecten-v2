@@ -26,13 +26,13 @@ import 'package:nearby_connections/nearby_connections.dart';
 //   return getBluetoothPermission();
 // }));
 
-class ConnectionProviders extends ChangeNotifier {
+class ConnectionNotifier extends ChangeNotifier {
   final Strategy strategy = Strategy.P2P_STAR;
 
   List<String> _connections = [];
   List<String> get connections => _connections;
 
-  ConnectionProviders() {
+  ConnectionNotifier() {
     checkPermissions();
   }
 
@@ -129,3 +129,6 @@ class ConnectionProviders extends ChangeNotifier {
     notifyListeners();
   }
 }
+
+final connectionProvider =
+    ChangeNotifierProvider((ref) => ConnectionNotifier());

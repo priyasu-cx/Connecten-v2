@@ -3,7 +3,6 @@ import 'package:flutter/material.dart';
 import 'package:hacknitr_round2/utils/colors.dart';
 import 'package:hacknitr_round2/utils/launch_urls.dart';
 import 'package:hacknitr_round2/utils/size_config.dart';
-import 'package:url_launcher/url_launcher.dart';
 
 Future ProfileDialog(allUserData, context) => showDialog(
     context: context,
