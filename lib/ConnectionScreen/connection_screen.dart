@@ -102,7 +102,7 @@ class _ConnectionsState extends State<Connections> {
           margin: EdgeInsets.fromLTRB(30, 0, 30, 25),
           child: Column(
             children: [
-              Text(
+              const Text(
                 "Connections",
                 style: TextStyle(
                   letterSpacing: 1,

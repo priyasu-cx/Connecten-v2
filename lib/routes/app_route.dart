@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:hacknitr_round2/ConnectionScreen/connection_screen.dart';
 import 'package:hacknitr_round2/Handler/auth_handler.dart';
 import 'package:hacknitr_round2/NearbyConnectScreen/nearby_connect.dart';
 import 'package:hacknitr_round2/ProfileScreen/profile_screen.dart';
@@ -29,6 +30,10 @@ abstract class AppRoute {
 
       case RoutePath.routeToNearbyScreen:
         currentWidget = const NearbyConnect();
+        break;
+
+      case RoutePath.routeToConnectionScreen:
+        currentWidget = const Connections();
         break;
 
       default:
