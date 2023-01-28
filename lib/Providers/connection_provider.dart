@@ -3,6 +3,29 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:nearby_connections/nearby_connections.dart';
 
+// Future<bool> getLocationPermission() async {
+//   if (await Nearby().checkLocationPermission() == false) {
+//     await Nearby().askLocationPermission();
+//   }
+//   // notifyListeners();
+//   return Nearby().checkLocationEnabled();
+// }
+
+// Future<bool> getBluetoothPermission() async {
+//   if (await Nearby().checkBluetoothPermission() == false) {
+//     Nearby().askBluetoothPermission();
+//   }
+//   return Nearby().checkBluetoothPermission();
+// }
+
+// final locationPermissionProvider = FutureProvider<bool>(((ref) {
+//   return getLocationPermission();
+// }));
+
+// final bluetoothPermissionProvider = FutureProvider<bool>(((ref) {
+//   return getBluetoothPermission();
+// }));
+
 class ConnectionProviders extends ChangeNotifier {
   final Strategy strategy = Strategy.P2P_STAR;
 

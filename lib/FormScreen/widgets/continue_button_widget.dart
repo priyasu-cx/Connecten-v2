@@ -6,7 +6,6 @@ import 'package:hacknitr_round2/Providers/database_provider.dart';
 import 'package:hacknitr_round2/routes/route_path.dart';
 import 'package:hacknitr_round2/utils/colors.dart';
 import 'package:fluttertoast/fluttertoast.dart';
-import 'package:hacknitr_round2/utils/size_config.dart';
 
 class ContinueButtonWidget extends ConsumerWidget {
   const ContinueButtonWidget({
@@ -37,26 +36,27 @@ class ContinueButtonWidget extends ConsumerWidget {
           if (nameController.text.isNotEmpty &&
               designationController.text.isNotEmpty &&
               bioController.text.isNotEmpty) {
-          UserModel userDetails = UserModel(
-            uid: _authState.uid,
-            name: nameController.text,
-            designation: designationController.text,
-            bio: bioController.text,
-            email: _authState.email!,
-            imageURL: _authState.photoURL!,
-            connectedList: [],
-            github: "",
-            linkedin: "",
-            twitter: "",
-            portfolio: "",
-            isPrivate: false,
-          );
-          bool state = await _databaseService.addUserData(userDetails);
-          print(state);
-          if (state) {
-            Navigator.pushReplacementNamed(
-                context, RoutePath.routeToForceProfileScreen);
-          }}else{
+            UserModel userDetails = UserModel(
+              uid: _authState.uid,
+              name: nameController.text,
+              designation: designationController.text,
+              bio: bioController.text,
+              email: _authState.email!,
+              imageURL: _authState.photoURL!,
+              connectedList: [],
+              github: "",
+              linkedin: "",
+              twitter: "",
+              portfolio: "",
+              isPrivate: false,
+            );
+            bool state = await _databaseService.addUserData(userDetails);
+            print(state);
+            if (state) {
+              Navigator.pushReplacementNamed(
+                  context, RoutePath.routeToForceProfileScreen);
+            }
+          } else {
             Fluttertoast.showToast(
                 msg: "Please fill all the fields",
                 toastLength: Toast.LENGTH_SHORT,

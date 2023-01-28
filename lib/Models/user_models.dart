@@ -11,7 +11,6 @@ class UserModel {
   String? twitter;
   String? portfolio;
   bool isPrivate;
-  int connectionCount;
 
   UserModel({
     required this.uid,
@@ -26,7 +25,6 @@ class UserModel {
     this.twitter,
     this.portfolio,
     required this.isPrivate,
-    required this.connectionCount,
   });
 
   // Convert a EventDetailsModel object into a Map object
@@ -45,7 +43,6 @@ class UserModel {
       twitter: map['twitter'],
       portfolio: map['portfolio'],
       isPrivate: map['isPrivate'],
-      connectionCount: map['connectionCount'],
     );
   }
 
@@ -63,7 +60,6 @@ class UserModel {
       "twitter": user.twitter,
       "portfolio": user.portfolio,
       "isPrivate": user.isPrivate,
-      "connectionCount": user.connectionCount,
     };
 
     return map;

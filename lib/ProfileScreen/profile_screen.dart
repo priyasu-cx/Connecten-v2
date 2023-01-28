@@ -1,4 +1,3 @@
-
 import 'package:flutter/material.dart';
 import 'package:hacknitr_round2/ProfileScreen/widgets/profile_header.dart';
 import 'package:hacknitr_round2/ProfileScreen/widgets/social_cards.dart';
@@ -15,14 +14,12 @@ class ProfileScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-
     return Scaffold(
         drawer: const Menu(),
         appBar: PreferredSize(
           preferredSize: Size.fromHeight(screenHeight! * 0.12),
           child: CustomAppbar(context),
         ),
-        
         body: SingleChildScrollView(
           child: Column(
             children: [
@@ -43,7 +40,7 @@ class ProfileScreen extends StatelessWidget {
                   children: [
                     Container(
                       padding:
-                      EdgeInsets.symmetric(vertical: 20, horizontal: 20),
+                          EdgeInsets.symmetric(vertical: 20, horizontal: 20),
                       alignment: Alignment.topRight,
                       child: SlidingSwitch(
                         value: false,
@@ -78,7 +75,7 @@ class ProfileScreen extends StatelessWidget {
                     ),
 
                     //Stack 2
-                    const ProfileHeaderContainer(),
+                    const ProfileHeaderWidget(),
                   ],
                 ),
               ),
@@ -97,7 +94,3 @@ class ProfileScreen extends StatelessWidget {
         ));
   }
 }
-
-
-
-
