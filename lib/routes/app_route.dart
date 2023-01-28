@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:hacknitr_round2/Handler/auth_handler.dart';
+import 'package:hacknitr_round2/ProfileScreen/profile_screen.dart';
 import 'package:hacknitr_round2/SplashScreen/splash_screen.dart';
 import 'package:hacknitr_round2/routes/route_path.dart';
 
@@ -19,6 +20,10 @@ abstract class AppRoute {
 
       case RoutePath.routeToProfileScreen:
         currentWidget = const AuthHandler();
+        break;
+
+      case RoutePath.routeToForceProfileScreen:
+        currentWidget = const ProfileScreen();
         break;
 
       default:

@@ -15,6 +15,10 @@ class DatabaseService {
     return state.exists;
   }
 
+  // Future<bool> get checkUserExists(String uid){
+
+  // }
+
   Stream<UserModel> get userDetails {
     return _userCollection.doc(_authUser!.uid).snapshots().map((snapshot) =>
         UserModel.fromMap(snapshot.data() as Map<String, dynamic>?));
@@ -23,7 +27,7 @@ class DatabaseService {
   Future<bool> addUserData(UserModel userDetails) async {
     _userCollection
         .doc(userDetails.uid)
-        .set(userDetails)
+        .set(userDetails.ToMap(userDetails))
         .onError((error, stackTrace) {
       return false;
     });

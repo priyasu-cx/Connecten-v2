@@ -6,7 +6,6 @@ final databaseProvider = Provider<DatabaseService>((ref) => DatabaseService());
 
 final checkUserExistsProvider =
     FutureProvider.family<bool, String>((ref, uid) async {
-  // return ref.watch(databaseProvider.checkUserExists(uid));
   return ref.watch(databaseProvider).checkUserExists(uid);
 });
 
