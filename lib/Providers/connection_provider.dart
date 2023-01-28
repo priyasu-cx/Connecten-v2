@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:hacknitr_round2/utils/fluttertoast.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:nearby_connections/nearby_connections.dart';
 
@@ -65,7 +66,7 @@ class ConnectionNotifier extends ChangeNotifier {
             _connections.add(name);
           }
           // TODO: Add New Connection Snackbar
-          // Get.snackbar("New Connection Found", "");
+          toastWidget("New Connection Found");
         },
         onEndpointLost: (id) {},
       );

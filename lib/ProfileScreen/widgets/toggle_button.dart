@@ -16,7 +16,6 @@ class _ToggleButtonState extends ConsumerState<ToggleButton> {
   Widget build(BuildContext context) {
     final cp = ref.watch(connectionProvider);
     final _authUser = ref.watch(authUserProvider);
-
     return Container(
       padding: EdgeInsets.symmetric(vertical: 20, horizontal: 20),
       alignment: Alignment.topRight,

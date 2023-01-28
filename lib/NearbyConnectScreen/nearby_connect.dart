@@ -1,19 +1,22 @@
 
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:hacknitr_round2/Providers/connection_provider.dart';
 import 'package:hacknitr_round2/utils/size_config.dart';
 import 'package:hacknitr_round2/widgets/appbar.dart';
 import 'package:hacknitr_round2/widgets/drawer.dart';
 import 'package:hacknitr_round2/widgets/profile_dialog.dart';
 
 
-class NearbyConnect extends StatefulWidget {
+
+class NearbyConnect extends ConsumerStatefulWidget {
   const NearbyConnect({Key? key}) : super(key: key);
 
   @override
-  State<NearbyConnect> createState() => _NearbyConnectState();
+  ConsumerState<NearbyConnect> createState() => _NearbyConnectState();
 }
 
-class _NearbyConnectState extends State<NearbyConnect> {
+class _NearbyConnectState extends ConsumerState<NearbyConnect> {
   List<Map<String, String?>> allUserData = [];
   bool isDone = false;
 
@@ -78,7 +81,9 @@ class _NearbyConnectState extends State<NearbyConnect> {
 
   @override
   Widget build(BuildContext context) {
-
+    final cp = ref.watch(connectionProvider);
+    print("-------Connection IDs-------");
+    print(cp.connections);
 
     print("Outside check -> ");
     print(allUserData.length);
@@ -110,7 +115,7 @@ class _NearbyConnectState extends State<NearbyConnect> {
                         itemBuilder: (context, i) {
                           //return Connect(userdata["fullname"], userdata["designation"]);
 
-                          return Connect(allUserData[i], allUserData[i]["fullname"], allUserData[i]["designation"]);
+                          return Connect(allUserData[i], allUserData[i]["fullname"], allUserData[i]["designation"], context);
                         })),
               ),
             ],
@@ -118,55 +123,58 @@ class _NearbyConnectState extends State<NearbyConnect> {
         ));
   }
 
-  Widget Connect(allUserData, name, designation) {
 
-    return InkWell(
-        onTap: (){ProfileDialog(allUserData, context);},
-        child: Container(
-            alignment: Alignment.center,
-            padding: EdgeInsets.symmetric(vertical: 10,horizontal: 20),
-            margin: EdgeInsets.only(bottom: 20),
-            height: screenHeight! * 0.15,
-            decoration: BoxDecoration(
-              color: Color(0xffEEF7FE),
-              borderRadius: BorderRadius.circular(20),
-            ),
-            child: Row(
-              crossAxisAlignment: CrossAxisAlignment.center,
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: [
-                Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: [
-                    Text(
-                      name,
-                      //textAlign: TextAlign.start,
-                      style: TextStyle(
-                        letterSpacing: 1,
-                        fontSize: 18,
-                        fontWeight: FontWeight.w600,
-                      ),
+}
+
+Widget Connect(allUserData, name, designation, context) {
+
+  return InkWell(
+      onTap: (){ProfileDialog(allUserData, context);},
+      child: Container(
+          alignment: Alignment.center,
+          padding: EdgeInsets.symmetric(vertical: 10,horizontal: 20),
+          margin: EdgeInsets.only(bottom: 20),
+          height: screenHeight! * 0.15,
+          decoration: BoxDecoration(
+            color: Color(0xffEEF7FE),
+            borderRadius: BorderRadius.circular(20),
+          ),
+          child: Row(
+            crossAxisAlignment: CrossAxisAlignment.center,
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            children: [
+              Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  Text(
+                    name,
+                    //textAlign: TextAlign.start,
+                    style: TextStyle(
+                      letterSpacing: 1,
+                      fontSize: 18,
+                      fontWeight: FontWeight.w600,
                     ),
-                    SizedBox(
-                      height: screenHeight! * 0.01,
+                  ),
+                  SizedBox(
+                    height: screenHeight! * 0.01,
+                  ),
+                  Text(
+                    designation,
+                    //textAlign: TextAlign.start,
+                    style: TextStyle(
+                      letterSpacing: 1,
+                      fontSize: 16,
+                      fontWeight: FontWeight.w300,
                     ),
-                    Text(
-                      designation,
-                      //textAlign: TextAlign.start,
-                      style: TextStyle(
-                        letterSpacing: 1,
-                        fontSize: 16,
-                        fontWeight: FontWeight.w300,
-                      ),
-                    ),
-                  ],
-                ),
-                Column(
-                  crossAxisAlignment: CrossAxisAlignment.end,
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: [
-                    Align(
+                  ),
+                ],
+              ),
+              Column(
+                crossAxisAlignment: CrossAxisAlignment.end,
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  Align(
                       alignment: Alignment.centerRight,
                       child: IconButton(
                         onPressed: () async{
@@ -174,12 +182,11 @@ class _NearbyConnectState extends State<NearbyConnect> {
                           // Get.snackbar("Connection Added", allUserData["fullname"]);
                         },
                         icon: Icon(Icons.person_add_alt_1_rounded),
-                        )
-                      ),
+                      )
+                  ),
 
-                  ],
-                )
-              ],
-            )));
-  }
+                ],
+              )
+            ],
+          )));
 }
