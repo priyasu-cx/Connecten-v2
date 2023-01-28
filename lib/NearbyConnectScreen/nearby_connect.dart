@@ -82,12 +82,24 @@ class _NearbyConnectState extends ConsumerState<NearbyConnect> {
   @override
   Widget build(BuildContext context) {
     final cp = ref.watch(connectionProvider);
+    final _databaseProvider = ref.watch(databaseProvider);
     // final _userdata = ref.watch(nearbyConnectionsProvider);
     print("-------Connection IDs-------");
     print(cp.connections);
     List<UserModel>? nearbyUsers = [];
 
-    // nearbyUsers = _userdata
+    // nearbyUsers = _userdatavoid
+    void fetchData() async {
+      nearbyUsers = await _databaseProvider.getNearbyData(cp.connections);
+    }
+
+    @override
+    void initState() {
+      print("----------------------------------------");
+      fetchData();
+      print(nearbyUsers!.length);
+      super.initState();
+    }
 
     return Scaffold(
         drawer: const Menu(),
@@ -113,12 +125,12 @@ class _NearbyConnectState extends ConsumerState<NearbyConnect> {
                     height: screenHeight! * 0.6,
                     //height: Get.height*0.5,
                     child: ListView.builder(
-                        itemCount: nearbyUsers.length,
+                        itemCount: nearbyUsers!.length,
                         itemBuilder: (context, i) {
                           //return Connect(userdata["fullname"], userdata["designation"]);
 
-                          return Connect(nearbyUsers[i], nearbyUsers[i].name,
-                              nearbyUsers[i].designation, context);
+                          return Connect(nearbyUsers![i], nearbyUsers![i].name,
+                              nearbyUsers![i].designation, context);
                         })),
               ),
             ],
