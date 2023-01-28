@@ -1,7 +1,5 @@
 
 import 'package:flutter/material.dart';
-import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:hacknitr_round2/utils/colors.dart';
 import 'package:hacknitr_round2/utils/size_config.dart';
 import 'package:hacknitr_round2/widgets/appbar.dart';
 import 'package:hacknitr_round2/widgets/drawer.dart';
