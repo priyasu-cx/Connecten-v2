@@ -1,7 +1,6 @@
 
 import 'package:flutter/material.dart';
 
-
 class FormScreen extends StatefulWidget {
   const FormScreen({Key? key}) : super(key: key);
 
@@ -14,16 +13,15 @@ class _FormScreenState extends State<FormScreen> {
   final _formKey = GlobalKey<FormState>();
 
   // Editing controller
-  final TextEditingController nameController = new TextEditingController();
-  final TextEditingController designationController =
-  new TextEditingController();
-  final TextEditingController bioController = new TextEditingController();
+  final TextEditingController nameController = TextEditingController();
+  final TextEditingController designationController = TextEditingController();
+  final TextEditingController bioController = TextEditingController();
 
   @override
   Widget build(BuildContext context) {
     // final sp = context.read<SignInProvider>();
 
-    // Name field
+    /// Name field
     final nameField = TextFormField(
       autofocus: false,
       controller: nameController,
@@ -33,8 +31,8 @@ class _FormScreenState extends State<FormScreen> {
       },
       textInputAction: TextInputAction.next,
       decoration: InputDecoration(
-        prefixIcon: Icon(Icons.person),
-        contentPadding: EdgeInsets.fromLTRB(20, 15, 20, 15),
+        prefixIcon: const Icon(Icons.person),
+        contentPadding: const EdgeInsets.fromLTRB(20, 15, 20, 15),
         hintText: "Name",
         border: OutlineInputBorder(
           borderRadius: BorderRadius.circular(10),
@@ -62,11 +60,13 @@ class _FormScreenState extends State<FormScreen> {
     );
 
     // Bio Field
-    final bioField = TextFormField(
+    final bioField = TextField(
       autofocus: false,
       controller: bioController,
+      minLines: 1,
+      maxLines: 4,
       keyboardType: TextInputType.text,
-      onSaved: (value) {
+      onSubmitted: (value) {
         bioController.text = value!;
       },
       textInputAction: TextInputAction.done,
@@ -92,6 +92,7 @@ class _FormScreenState extends State<FormScreen> {
           //   designationController.text,
           //   bioController.text,
           // );
+
         },
         padding: EdgeInsets.fromLTRB(20, 15, 20, 15),
         minWidth: MediaQuery.of(context).size.width * 0.5,
