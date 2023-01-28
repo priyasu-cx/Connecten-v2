@@ -33,6 +33,7 @@ class DatabaseService {
             .add(UserModel.fromMap(value.data() as Map<String, dynamic>?));
       });
     }
+    print(nearbyData);
     return nearbyData;
   }
 
