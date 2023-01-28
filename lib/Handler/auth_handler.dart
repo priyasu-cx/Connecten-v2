@@ -10,7 +10,6 @@ class AuthHandler extends ConsumerWidget {
   Widget build(BuildContext context, WidgetRef ref) {
     final authState = ref.watch(authStateChangesProvider);
     return authState.when(data: (value) {
-      print("------------------------");
       if (value == null) {
         return const LoginScreen();
       }
