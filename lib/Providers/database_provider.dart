@@ -17,3 +17,8 @@ final userDetailsWithIdProvider =
     StreamProvider.family<UserModel, String>(((ref, id) {
   return ref.watch(databaseProvider).userDetailsWithID(id);
 }));
+
+final nearbyConnectionsProvider =
+    StateProvider.family<List<UserModel>?, List<String>>(((ref, nearbyUsers) {
+  return ref.watch(databaseProvider).allConnectionDetails(nearbyUsers);
+}));
