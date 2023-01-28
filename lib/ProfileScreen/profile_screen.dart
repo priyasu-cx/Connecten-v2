@@ -45,20 +45,23 @@ class ProfileScreen extends StatelessWidget {
                   ],
                 ),
               ),
-              Row(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  Text(
-                    "My Links",
-                    style: TextStyle(
-                      letterSpacing: 1,
-                      fontSize: 20,
-                      fontWeight: FontWeight.w500,
+              SizedBox(
+                width: screenWidth!,
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    Text(
+                      "My Links",
+                      style: TextStyle(
+                        letterSpacing: 1,
+                        fontSize: 20,
+                        fontWeight: FontWeight.w500,
+                      ),
+                      textAlign: TextAlign.left,
                     ),
-                    textAlign: TextAlign.left,
-                  ),
-                  LockButton(),
-                ],
+                    LockButton(),
+                  ],
+                ),
               ),
               socialCard(context),
             ],

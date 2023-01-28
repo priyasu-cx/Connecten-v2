@@ -1,7 +1,10 @@
 
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:hacknitr_round2/Models/user_models.dart';
 import 'package:hacknitr_round2/Providers/connection_provider.dart';
+import 'package:hacknitr_round2/Providers/database_provider.dart';
+import 'package:hacknitr_round2/Services/database_service.dart';
 import 'package:hacknitr_round2/utils/size_config.dart';
 import 'package:hacknitr_round2/widgets/appbar.dart';
 import 'package:hacknitr_round2/widgets/drawer.dart';
@@ -17,8 +20,8 @@ class NearbyConnect extends ConsumerStatefulWidget {
 }
 
 class _NearbyConnectState extends ConsumerState<NearbyConnect> {
-  List<Map<String, String?>> allUserData = [];
-  bool isDone = false;
+  // List<Map<String, String?>> allUserData = [];
+  // bool isDone = false;
 
   // Future<Map<String, String?>> fetchUserData(String uid) async {
   //   var userData = new Map<String, String?>();
@@ -82,11 +85,16 @@ class _NearbyConnectState extends ConsumerState<NearbyConnect> {
   @override
   Widget build(BuildContext context) {
     final cp = ref.watch(connectionProvider);
+    // final _userdata = ref.watch(nearbyConnectionsProvider);
     print("-------Connection IDs-------");
     print(cp.connections);
 
+    List<UserModel>? nearbyUsers = DatabaseService().allConnectionDetails(cp.connections);
+    // nearbyUsers = _userdata
+
+
     print("Outside check -> ");
-    print(allUserData.length);
+    print(nearbyUsers!.length);
     return Scaffold(
         drawer: const Menu(),
         appBar: PreferredSize(
@@ -111,11 +119,11 @@ class _NearbyConnectState extends ConsumerState<NearbyConnect> {
                     height: screenHeight! * 0.6,
                     //height: Get.height*0.5,
                     child: ListView.builder(
-                        itemCount: allUserData.length,
+                        itemCount: nearbyUsers.length,
                         itemBuilder: (context, i) {
                           //return Connect(userdata["fullname"], userdata["designation"]);
 
-                          return Connect(allUserData[i], allUserData[i]["fullname"], allUserData[i]["designation"], context);
+                          return Connect(nearbyUsers[i], nearbyUsers[i].name, nearbyUsers[i].designation, context);
                         })),
               ),
             ],
