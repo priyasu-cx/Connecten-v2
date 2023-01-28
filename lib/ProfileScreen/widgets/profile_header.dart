@@ -63,7 +63,8 @@ class ProfileHeaderWidget extends ConsumerWidget {
               ],
             ),
           );
-        });
+        }
+        );
   }
 }
 
