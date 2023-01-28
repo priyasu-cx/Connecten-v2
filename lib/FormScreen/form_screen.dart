@@ -24,7 +24,6 @@ class FormScreen extends ConsumerWidget {
     final _authUser = ref.watch(authUserProvider);
     final _database = ref.watch(databaseProvider);
 
-
     /// Name field
     final nameField = TextFormField(
       autofocus: false,
@@ -112,7 +111,8 @@ class FormScreen extends ConsumerWidget {
             isPrivate: false,
           );
           _database.addUserData(user);
-          Navigator.pushReplacementNamed(context, RoutePath.routeToProfileScreen);
+          Navigator.pushReplacementNamed(
+              context, RoutePath.routeToProfileScreen);
         },
         padding: EdgeInsets.fromLTRB(20, 15, 20, 15),
         minWidth: MediaQuery.of(context).size.width * 0.5,

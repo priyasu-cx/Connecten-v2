@@ -1,4 +1,3 @@
-
 import 'package:flutter/material.dart';
 import 'package:hacknitr_round2/LoginScreen/login_screen.dart';
 import 'package:hacknitr_round2/ProfileScreen/profile_screen.dart';
@@ -24,8 +23,8 @@ class _MenuState extends State<Menu> {
       child: Material(
         color: AppColor.secbgcolor,
         child: Container(
-          margin:
-          EdgeInsets.fromLTRB(30, screenHeight! * 0.12, screenWidth! * 0.05, 0),
+          margin: EdgeInsets.fromLTRB(
+              30, screenHeight! * 0.12, screenWidth! * 0.05, 0),
           child: Column(
             children: [
               headerWidget(),
@@ -82,53 +81,79 @@ class _MenuState extends State<Menu> {
                   name: 'Log out',
                   icon: Icons.logout,
                   onPressed: () => onItemPressed(context, index: 4)),
-              SizedBox(height: screenHeight!*0.13),
+              SizedBox(height: screenHeight! * 0.13),
               Row(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
-                  Icon(Icons.file_copy, color: Colors.black,size: 16,),
-                  TextButton(onPressed: (){
-                    showLicensePage(context: context, applicationIcon: Image.asset(ImageAsset.applogo, height: 70,),applicationVersion: "1.2.1", applicationLegalese: "Copyright CodingReboot");
-                  }, child: Text(
-                    "Licenses", style: TextStyle(fontWeight: FontWeight.w600, color: Colors.black, fontSize: 16),
-                  ))
-
+                  Icon(
+                    Icons.file_copy,
+                    color: Colors.black,
+                    size: 16,
+                  ),
+                  TextButton(
+                      onPressed: () {
+                        showLicensePage(
+                            context: context,
+                            applicationIcon: Image.asset(
+                              ImageAsset.applogo,
+                              height: 70,
+                            ),
+                            applicationVersion: "1.2.1",
+                            applicationLegalese: "Copyright CodingReboot");
+                      },
+                      child: Text(
+                        "Licenses",
+                        style: TextStyle(
+                            fontWeight: FontWeight.w600,
+                            color: Colors.black,
+                            fontSize: 16),
+                      ))
                 ],
               ),
               Row(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
-                  TextButton(onPressed: ()async{
-                    var url = Uri.parse("https://pages.flycricket.io/connecten/terms.html");
+                  TextButton(
+                      onPressed: () async {
+                        var url = Uri.parse(
+                            "https://pages.flycricket.io/connecten/terms.html");
 
-                    if (await canLaunchUrl(url)) {
-                      // LaunchMode.externalApplication;
-                      await launchUrl(url);
-                    } else {
-                      throw 'Could not launch $url';
-                    }
-                  }, child: Text(
-                    "Terms & Conditions", style: TextStyle(fontWeight: FontWeight.w600, color: Colors.black, fontSize: 10),
-                  )),
-                  SizedBox(width: screenWidth!*0.02),
-                  TextButton(onPressed: ()async{
+                        if (await canLaunchUrl(url)) {
+                          // LaunchMode.externalApplication;
+                          await launchUrl(url);
+                        } else {
+                          throw 'Could not launch $url';
+                        }
+                      },
+                      child: Text(
+                        "Terms & Conditions",
+                        style: TextStyle(
+                            fontWeight: FontWeight.w600,
+                            color: Colors.black,
+                            fontSize: 10),
+                      )),
+                  SizedBox(width: screenWidth! * 0.02),
+                  TextButton(
+                      onPressed: () async {
+                        var url = Uri.parse(
+                            "https://pages.flycricket.io/connecten/privacy.html");
 
-                    var url = Uri.parse("https://pages.flycricket.io/connecten/privacy.html");
-
-                    if (await canLaunchUrl(url)) {
-                      // LaunchMode.externalApplication;
-                      await launchUrl(url);
-                    } else {
-                      throw 'Could not launch $url';
-                    }
-
-                  }, child: Text(
-                    "Privacy Policy", style: TextStyle(fontWeight: FontWeight.w600, color: Colors.black, fontSize: 10),
-                  )),
-
+                        if (await canLaunchUrl(url)) {
+                          // LaunchMode.externalApplication;
+                          await launchUrl(url);
+                        } else {
+                          throw 'Could not launch $url';
+                        }
+                      },
+                      child: Text(
+                        "Privacy Policy",
+                        style: TextStyle(
+                            fontWeight: FontWeight.w600,
+                            color: Colors.black,
+                            fontSize: 10),
+                      )),
                 ],
               )
-
             ],
           ),
         ),
@@ -142,21 +167,21 @@ class _MenuState extends State<Menu> {
 
     switch (index) {
       case 0:
-        Navigator.push(
-            context, MaterialPageRoute(builder: (context) => const LoginScreen()));
+        Navigator.push(context,
+            MaterialPageRoute(builder: (context) => const LoginScreen()));
         break;
       case 1:
-        Navigator.push(
-            context, MaterialPageRoute(builder: (context) => const LoginScreen()));
+        Navigator.push(context,
+            MaterialPageRoute(builder: (context) => const LoginScreen()));
         break;
       case 2:
-        Navigator.push(
-            context, MaterialPageRoute(builder: (context) => const ProfileScreen()));
+        Navigator.push(context,
+            MaterialPageRoute(builder: (context) => const ProfileScreen()));
         break;
 
       case 3:
-        Navigator.push(
-            context, MaterialPageRoute(builder: (context) => const LoginScreen()));
+        Navigator.push(context,
+            MaterialPageRoute(builder: (context) => const LoginScreen()));
         break;
 
       case 4:
@@ -208,5 +233,3 @@ class _MenuState extends State<Menu> {
     );
   }
 }
-
-
