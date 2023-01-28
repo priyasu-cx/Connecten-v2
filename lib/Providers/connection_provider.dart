@@ -3,13 +3,13 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:nearby_connections/nearby_connections.dart';
 
-class ConnectionProviders extends ChangeNotifier {
+class ConnectionNotifier extends ChangeNotifier {
   final Strategy strategy = Strategy.P2P_STAR;
 
   List<String> _connections = [];
   List<String> get connections => _connections;
 
-  ConnectionProviders() {
+  ConnectionNotifier() {
     checkPermissions();
   }
 
@@ -106,3 +106,5 @@ class ConnectionProviders extends ChangeNotifier {
     notifyListeners();
   }
 }
+
+final connectionProvider = ChangeNotifierProvider((ref) => ConnectionNotifier());
