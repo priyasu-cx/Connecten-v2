@@ -8,6 +8,7 @@ import 'package:hacknitr_round2/utils/size_config.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
+
   await Firebase.initializeApp(
     options: DefaultFirebaseOptions.currentPlatform,
   );
