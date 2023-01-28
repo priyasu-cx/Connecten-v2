@@ -127,66 +127,82 @@ class _NearbyConnectState extends ConsumerState<NearbyConnect> {
   }
 }
 
-Widget Connect(allUserData, name, designation, context) {
-  return InkWell(
-      onTap: () {
-        ProfileDialog(allUserData, context);
-      },
-      child: Container(
-          alignment: Alignment.center,
-          padding: EdgeInsets.symmetric(vertical: 10, horizontal: 20),
-          margin: EdgeInsets.only(bottom: 20),
-          height: screenHeight! * 0.15,
-          decoration: BoxDecoration(
-            color: Color(0xffEEF7FE),
-            borderRadius: BorderRadius.circular(20),
-          ),
-          child: Row(
-            crossAxisAlignment: CrossAxisAlignment.center,
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-            children: [
-              Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  Text(
-                    name,
-                    //textAlign: TextAlign.start,
-                    style: TextStyle(
-                      letterSpacing: 1,
-                      fontSize: 18,
-                      fontWeight: FontWeight.w600,
+class Connect extends ConsumerWidget {
+  final UserModel user;
+  final String name;
+  final String designation;
+  
+  const Connect(UserModel nearbyUser, {
+    Key? key,
+    required this.user,
+    required this.name,
+    required this.designation,
+  }) : super(key: key);
+
+  @override
+  Widget build(BuildContext context, WidgetRef ref) {
+    return InkWell(
+        onTap: () {
+          ProfileDialog(user, context);
+        },
+        child: Container(
+            alignment: Alignment.center,
+            padding: EdgeInsets.symmetric(vertical: 10, horizontal: 20),
+            margin: EdgeInsets.only(bottom: 20),
+            height: screenHeight! * 0.15,
+            decoration: BoxDecoration(
+              color: Color(0xffEEF7FE),
+              borderRadius: BorderRadius.circular(20),
+            ),
+            child: Row(
+              crossAxisAlignment: CrossAxisAlignment.center,
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: [
+                Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    Text(
+                      name,
+                      //textAlign: TextAlign.start,
+                      style: TextStyle(
+                        letterSpacing: 1,
+                        fontSize: 18,
+                        fontWeight: FontWeight.w600,
+                      ),
                     ),
-                  ),
-                  SizedBox(
-                    height: screenHeight! * 0.01,
-                  ),
-                  Text(
-                    designation,
-                    //textAlign: TextAlign.start,
-                    style: TextStyle(
-                      letterSpacing: 1,
-                      fontSize: 16,
-                      fontWeight: FontWeight.w300,
+                    SizedBox(
+                      height: screenHeight! * 0.01,
                     ),
-                  ),
-                ],
-              ),
-              Column(
-                crossAxisAlignment: CrossAxisAlignment.end,
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  Align(
-                      alignment: Alignment.centerRight,
-                      child: IconButton(
-                        onPressed: () async {
-                          // await sp.addConnection(allUserData["uid"]);
-                          // Get.snackbar("Connection Added", allUserData["fullname"]);
-                        },
-                        icon: Icon(Icons.person_add_alt_1_rounded),
-                      )),
-                ],
-              )
-            ],
-          )));
+                    Text(
+                      designation,
+                      //textAlign: TextAlign.start,
+                      style: TextStyle(
+                        letterSpacing: 1,
+                        fontSize: 16,
+                        fontWeight: FontWeight.w300,
+                      ),
+                    ),
+                  ],
+                ),
+                Column(
+                  crossAxisAlignment: CrossAxisAlignment.end,
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    Align(
+                        alignment: Alignment.centerRight,
+                        child: IconButton(
+                          onPressed: () async {
+                            // await sp.addConnection(allUserData["uid"]);
+                            // Get.snackbar("Connection Added", allUserData["fullname"]);
+                          },
+                          icon: Icon(Icons.person_add_alt_1_rounded),
+                        )),
+                  ],
+                )
+              ],
+            )));
+  }
 }
+
+
