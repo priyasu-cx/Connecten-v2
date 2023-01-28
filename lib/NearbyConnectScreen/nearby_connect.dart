@@ -16,9 +16,9 @@ class NearbyConnect extends ConsumerStatefulWidget {
 }
 
 class _NearbyConnectState extends ConsumerState<NearbyConnect> {
-  // List<Map<String, String?>> allUserData = [];
-  // bool isDone = false;
-  //
+  List<Map<String, String?>> allUserData = [];
+  bool isDone = false;
+
   // Future<Map<String, String?>> fetchUserData(String uid) async {
   //   var userData = new Map<String, String?>();
   //   List<String?> connectedList = [];
@@ -78,6 +78,7 @@ class _NearbyConnectState extends ConsumerState<NearbyConnect> {
   //   }
   //   super.initState();
   // }
+
 
   @override
   Widget build(BuildContext context) {
