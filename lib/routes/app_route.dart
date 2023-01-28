@@ -3,8 +3,6 @@ import 'package:hacknitr_round2/Handler/auth_handler.dart';
 import 'package:hacknitr_round2/SplashScreen/splash_screen.dart';
 import 'package:hacknitr_round2/routes/route_path.dart';
 
-import '../ProfileScreen/profile_screen.dart';
-
 abstract class AppRoute {
   static Route<dynamic> generateRoute(RouteSettings settings) {
     Widget currentWidget;
@@ -20,7 +18,7 @@ abstract class AppRoute {
         break;
 
       case RoutePath.routeToProfileScreen:
-        currentWidget = const ProfileScreen();
+        currentWidget = const AuthHandler();
         break;
 
       default:
