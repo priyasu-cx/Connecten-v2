@@ -5,4 +5,5 @@ abstract class RoutePath {
   static const routeToProfileScreen = 'profile-screen';
   static const routeToForceProfileScreen = 'profile-screen-force';
   static const routeToNearbyScreen = 'nearby-screen';
+  static const routeToConnectionScreen = 'connection-screen';
 }

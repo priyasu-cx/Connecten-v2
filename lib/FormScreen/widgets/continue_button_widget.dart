@@ -6,6 +6,7 @@ import 'package:hacknitr_round2/Providers/database_provider.dart';
 import 'package:hacknitr_round2/routes/route_path.dart';
 import 'package:hacknitr_round2/utils/colors.dart';
 import 'package:fluttertoast/fluttertoast.dart';
+import 'package:hacknitr_round2/utils/fluttertoast.dart';
 
 class ContinueButtonWidget extends ConsumerWidget {
   const ContinueButtonWidget({
@@ -59,14 +60,7 @@ class ContinueButtonWidget extends ConsumerWidget {
             }
           } else {
 
-            Fluttertoast.showToast(
-                msg: "Please fill all the fields",
-                toastLength: Toast.LENGTH_SHORT,
-                gravity: ToastGravity.BOTTOM,
-                timeInSecForIosWeb: 1,
-                backgroundColor: AppColor.googlegrey,
-                textColor: Colors.white,
-                fontSize: 14);
+            toastWidget("Please fill all the fields");
           }
         },
         padding: EdgeInsets.fromLTRB(20, 15, 20, 15),

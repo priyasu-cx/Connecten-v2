@@ -1,9 +1,22 @@
 import 'package:flutter/material.dart';
-import 'package:hacknitr_round2/Models/user_models.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:hacknitr_round2/utils/assets.dart';
 import 'package:hacknitr_round2/utils/size_config.dart';
 
-Widget social(context, index, image, text, link) {
-  openDialog(image, text, index) => showDialog(
+class social extends ConsumerWidget {
+  final int index;
+  final String image;
+  final String text;
+
+
+  const social({
+    Key? key,
+    required this.index,
+    required this.image,
+    required this.text,
+  }) : super(key: key);
+
+  openDialog(image, text, index, context) => showDialog(
     context: context,
     builder: (context) {
       // final sp = context.read<SignInProvider>();
@@ -84,44 +97,48 @@ Widget social(context, index, image, text, link) {
     },
   );
 
-  return GestureDetector(
-      onTap: () {
-        openDialog(image, text, index);
-      },
-      child: Container(
-        width: screenWidth! * 0.32,
-        padding: EdgeInsets.fromLTRB(20, 20, 20, 20),
-        margin: EdgeInsets.all(10),
-        decoration: BoxDecoration(
-          color: Color(0xffeef7fe),
-          borderRadius: BorderRadius.circular(20),
-        ),
-        child: Stack(
-          alignment: Alignment.center,
-          children: [
+  @override
+  Widget build(BuildContext context, WidgetRef ref) {
+    return GestureDetector(
+        onTap: () {
+          openDialog(image, text, index, context);
+        },
+        child: Container(
+          width: screenWidth! * 0.32,
+          padding: EdgeInsets.fromLTRB(20, 20, 20, 20),
+          margin: EdgeInsets.all(10),
+          decoration: BoxDecoration(
+            color: Color(0xffeef7fe),
+            borderRadius: BorderRadius.circular(20),
+          ),
+          child: Stack(
+            alignment: Alignment.center,
+            children: [
 
-            Column(
-              mainAxisAlignment: MainAxisAlignment.center,
-              crossAxisAlignment: CrossAxisAlignment.center,
-              children: [
-                Image.asset(
-                  image,
-                  height: 25,
-                  width: 25,
-                ),
-                SizedBox(height: screenHeight! * 0.01),
-                Text(
-                  text,
-                  //textAlign: TextAlign.start,
-                  style: TextStyle(
-                    letterSpacing: 1,
-                    fontSize: 16,
-                    fontWeight: FontWeight.w300,
+              Column(
+                mainAxisAlignment: MainAxisAlignment.center,
+                crossAxisAlignment: CrossAxisAlignment.center,
+                children: [
+                  Image.asset(
+                    image,
+                    height: 25,
+                    width: 25,
                   ),
-                ),
-              ],
-            )],
-        ),
-      )
-  );
+                  SizedBox(height: screenHeight! * 0.01),
+                  Text(
+                    text,
+                    //textAlign: TextAlign.start,
+                    style: TextStyle(
+                      letterSpacing: 1,
+                      fontSize: 16,
+                      fontWeight: FontWeight.w300,
+                    ),
+                  ),
+                ],
+              )],
+          ),
+        )
+    );
+  }
 }
+

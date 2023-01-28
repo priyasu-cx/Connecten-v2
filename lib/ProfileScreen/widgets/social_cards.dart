@@ -11,18 +11,14 @@ Widget socialCard(BuildContext context) {
         Row(
             mainAxisAlignment: MainAxisAlignment.spaceAround,
             children: [
-              social(context, 1, ImageAsset.linkedinlogo, "Linkedin",
-                  "link"),
-              social(context, 2, ImageAsset.githublogo, "Github",
-                  "link"),
+              social(index: 1, image: ImageAsset.linkedinlogo, text: "Linkedin"),
+              social(index:2, image:ImageAsset.githublogo,text: "Github"),
             ]),
         Row(
             mainAxisAlignment: MainAxisAlignment.spaceAround,
             children: [
-              social(context, 3, ImageAsset.websitelogo, "Portfolio",
-                  "link"),
-              social(context, 4, ImageAsset.twitterlogo, "Twitter",
-                  "link"),
+              social(index: 3, image: ImageAsset.websitelogo, text: "Portfolio"),
+              social(index:4, image:ImageAsset.twitterlogo,text: "Twitter"),
             ]),
         SizedBox(
           height: screenHeight! * 0.02,

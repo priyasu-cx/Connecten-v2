@@ -21,7 +21,7 @@ class ProfileHeaderWidget extends ConsumerWidget {
               children: [
                 CircleAvatar(
                   radius: screenWidth! * 0.12,
-                  foregroundImage: NetworkImage(userData.imageURL!),
+                  foregroundImage: NetworkImage(userData.imageURL),
                   backgroundImage: AssetImage(ImageAsset.splashScreenGif),
                 ),
                 SizedBox(
