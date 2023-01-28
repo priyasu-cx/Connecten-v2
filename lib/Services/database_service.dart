@@ -15,10 +15,6 @@ class DatabaseService {
     return state.exists;
   }
 
-  // Future<bool> get checkUserExists(String uid){
-
-  // }
-
   Stream<UserModel> get userDetails {
     return _userCollection.doc(_authUser!.uid).snapshots().map((snapshot) =>
         UserModel.fromMap(snapshot.data() as Map<String, dynamic>?));
@@ -32,5 +28,9 @@ class DatabaseService {
       return false;
     });
     return true;
+  }
+
+  Future<void> updateUserData(UserModel userDetails) async {
+    _userCollection.doc(userDetails.uid).update(userDetails.ToMap(userDetails));
   }
 }
