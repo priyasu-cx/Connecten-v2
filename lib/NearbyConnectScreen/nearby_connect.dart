@@ -87,12 +87,6 @@ class _NearbyConnectState extends ConsumerState<NearbyConnect> {
     print(cp.connections);
     List<UserModel>? nearbyUsers = [];
 
-    setState(() async {
-      // nearbyUsers = await DatabaseService().allConnectionDetails(cp.connections);
-      print("Outside check -> ");
-      print(nearbyUsers!.length);
-    });
-
     // nearbyUsers = _userdata
 
     return Scaffold(
@@ -119,12 +113,12 @@ class _NearbyConnectState extends ConsumerState<NearbyConnect> {
                     height: screenHeight! * 0.6,
                     //height: Get.height*0.5,
                     child: ListView.builder(
-                        itemCount: nearbyUsers!.length,
+                        itemCount: nearbyUsers.length,
                         itemBuilder: (context, i) {
                           //return Connect(userdata["fullname"], userdata["designation"]);
 
-                          return Connect(nearbyUsers![i], nearbyUsers![i].name,
-                              nearbyUsers![i].designation, context);
+                          return Connect(nearbyUsers[i], nearbyUsers[i].name,
+                              nearbyUsers[i].designation, context);
                         })),
               ),
             ],
