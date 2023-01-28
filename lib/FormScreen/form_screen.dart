@@ -1,15 +1,14 @@
-
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:hacknitr_round2/Models/user_models.dart';
+import 'package:hacknitr_round2/Providers/auth_providers.dart';
+import 'package:hacknitr_round2/utils/colors.dart';
+import 'package:hacknitr_round2/utils/size_config.dart';
+import 'package:toast/toast.dart';
 
-class FormScreen extends StatefulWidget {
-  const FormScreen({Key? key}) : super(key: key);
+class FormScreen extends ConsumerWidget {
+  FormScreen({Key? key}) : super(key: key);
 
-  @override
-  State<FormScreen> createState() => _FormScreenState();
-}
-
-class _FormScreenState extends State<FormScreen> {
-  // Form key
   final _formKey = GlobalKey<FormState>();
 
   // Editing controller
@@ -18,8 +17,9 @@ class _FormScreenState extends State<FormScreen> {
   final TextEditingController bioController = TextEditingController();
 
   @override
-  Widget build(BuildContext context) {
-    // final sp = context.read<SignInProvider>();
+  Widget build(BuildContext context, WidgetRef ref) {
+    ToastContext().init(context);
+    final _authUser = ref.watch(authUserProvider);
 
     /// Name field
     final nameField = TextFormField(
@@ -32,7 +32,8 @@ class _FormScreenState extends State<FormScreen> {
       textInputAction: TextInputAction.next,
       decoration: InputDecoration(
         prefixIcon: const Icon(Icons.person),
-        contentPadding: const EdgeInsets.fromLTRB(20, 15, 20, 15),
+        contentPadding: EdgeInsets.symmetric(
+            vertical: screenHeight! * 0.02, horizontal: screenWidth! * 0.05),
         hintText: "Name",
         border: OutlineInputBorder(
           borderRadius: BorderRadius.circular(10),
@@ -50,8 +51,9 @@ class _FormScreenState extends State<FormScreen> {
       },
       textInputAction: TextInputAction.next,
       decoration: InputDecoration(
-        prefixIcon: Icon(Icons.work),
-        contentPadding: EdgeInsets.fromLTRB(20, 15, 20, 15),
+        prefixIcon: const Icon(Icons.work),
+        contentPadding: EdgeInsets.symmetric(
+            vertical: screenHeight! * 0.02, horizontal: screenWidth! * 0.05),
         hintText: "Designation",
         border: OutlineInputBorder(
           borderRadius: BorderRadius.circular(10),
@@ -71,8 +73,9 @@ class _FormScreenState extends State<FormScreen> {
       },
       textInputAction: TextInputAction.done,
       decoration: InputDecoration(
-        prefixIcon: Icon(Icons.school),
-        contentPadding: EdgeInsets.fromLTRB(20, 15, 20, 15),
+        prefixIcon: const Icon(Icons.school),
+        contentPadding: EdgeInsets.symmetric(
+            vertical: screenHeight! * 0.02, horizontal: screenWidth! * 0.05),
         hintText: "Bio",
         border: OutlineInputBorder(
           borderRadius: BorderRadius.circular(10),
@@ -83,20 +86,31 @@ class _FormScreenState extends State<FormScreen> {
     // Continue Button
     final continueButton = Material(
       elevation: 5,
-      color: Color(0xff567DF4),
+      color: AppColor.buttoncolor,
       borderRadius: BorderRadius.circular(30),
       child: MaterialButton(
         onPressed: () {
-          // handleForm(
-          //   nameController.text,
-          //   designationController.text,
-          //   bioController.text,
-          // );
+          Toast.show("Profile Created",
+              duration: Toast.lengthShort, gravity: Toast.bottom);
 
+          UserModel user = UserModel(
+            uid: _authUser.uid,
+            name: nameController.text,
+            designation: designationController.text,
+            bio: bioController.text,
+            email: _authUser.email!,
+            imageURL: _authUser.photoURL!,
+            connectedList: [],
+            github: "",
+            linkedin: "",
+            twitter: "",
+            portfolio: "",
+            isPrivate: false,
+          );
         },
         padding: EdgeInsets.fromLTRB(20, 15, 20, 15),
         minWidth: MediaQuery.of(context).size.width * 0.5,
-        child: Text(
+        child: const Text(
           " Continue ",
           style: TextStyle(
             fontSize: 15,
@@ -107,47 +121,51 @@ class _FormScreenState extends State<FormScreen> {
       ),
     );
 
-    return Scaffold(
-      backgroundColor: Colors.white,
-      body: Center(
-        child: SingleChildScrollView(
-          child: Container(
-            color: Colors.white,
-            child: Padding(
-              padding: const EdgeInsets.all(36.0),
-              child: Form(
-                key: _formKey,
-                child: Column(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  crossAxisAlignment: CrossAxisAlignment.center,
-                  children: <Widget>[
-                    SizedBox(
-                      height: 150,
-                      // child: sp.imageUrl == null
-                      //     ? Image.asset("assets/animation.gif")
-                      //     : CircleAvatar(
-                      //   radius: 75,
-                      //   backgroundImage: AssetImage(ImageAsset.profileAvatar),
-                      // ),
-                      child: Image.asset("assets/animation.gif"),
-                    ),
-                    SizedBox(
-                      height: 45,
-                    ),
-                    nameField,
-                    SizedBox(
-                      height: 20,
-                    ),
-                    designationField,
-                    SizedBox(
-                      height: 20,
-                    ),
-                    bioField,
-                    SizedBox(
-                      height: 20,
-                    ),
-                    continueButton,
-                  ],
+    return SafeArea(
+      top: true,
+      child: Scaffold(
+        backgroundColor: Colors.white,
+        body: Center(
+          child: SingleChildScrollView(
+            child: Container(
+              color: Colors.white,
+              child: Padding(
+                padding: EdgeInsets.all(screenHeight! * 0.04),
+                child: Form(
+                  key: _formKey,
+                  child: Column(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    crossAxisAlignment: CrossAxisAlignment.center,
+                    children: <Widget>[
+                      SizedBox(
+                        height: 150,
+                        child: authUserProvider == null
+                            ? Image.asset("assets/animation.gif")
+                            : CircleAvatar(
+                                radius: 75,
+                                backgroundImage:
+                                    NetworkImage(_authUser.photoURL!),
+                              ),
+                        // child: Image.asset("assets/animation.gif"),
+                      ),
+                      SizedBox(
+                        height: 45,
+                      ),
+                      nameField,
+                      SizedBox(
+                        height: 20,
+                      ),
+                      designationField,
+                      SizedBox(
+                        height: 20,
+                      ),
+                      bioField,
+                      SizedBox(
+                        height: 20,
+                      ),
+                      continueButton,
+                    ],
+                  ),
                 ),
               ),
             ),
@@ -156,24 +174,4 @@ class _FormScreenState extends State<FormScreen> {
       ),
     );
   }
-
-  // Future handleForm(String name, String designation, String bio) async {
-  //   // final sp = context.read<SignInProvider>();
-  //   // final ip = context.read<InternetProvider>();
-  //   // await ip.checkInternetConnection();
-  //
-  //   if (ip.hasInternet == false) {
-  //     openSnackBar(
-  //         context, "Check your Internet connection.", Colors.red.shade400);
-  //   } else {
-  //     await sp.setFormData(name, designation, bio).then((value) {
-  //       sp.saveFormDataToFirestore().then((value) {
-  //         sp.setFormDone().then((value) {
-  //           Navigator.pushReplacement(
-  //               context, MaterialPageRoute(builder: (context) => Profile()));
-  //         });
-  //       });
-  //     });
-  //   }
-  // }
 }
