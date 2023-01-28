@@ -1,3 +1,5 @@
+import 'package:firebase_auth/firebase_auth.dart';
+
 class UserModel {
   String uid;
   String name;
@@ -44,5 +46,24 @@ class UserModel {
       portfolio: map['portfolio'],
       isPrivate: map['isPrivate'],
     );
+  }
+
+  Map<String, dynamic> ToMap(UserModel user) {
+    Map<String, dynamic> map = {
+      "uid": user.uid,
+      "name": user.name,
+      "designation": user.designation,
+      "bio": user.bio,
+      "email": user.email,
+      "imageURL": user.imageURL,
+      "connectedList": user.connectedList,
+      "github": user.github,
+      "linkedin": user.linkedin,
+      "twitter": user.twitter,
+      "portfolio": user.portfolio,
+      "isPrivate": user.isPrivate,
+    };
+
+    return map;
   }
 }

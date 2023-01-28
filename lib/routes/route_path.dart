@@ -3,4 +3,5 @@ abstract class RoutePath {
   static const routeToSplashScreen = 'splash-screen';
   static const routeToLoginScreen = 'login-screen';
   static const routeToProfileScreen = 'profile-screen';
+  static const routeToForceProfileScreen = 'profile-screen-force';
 }
