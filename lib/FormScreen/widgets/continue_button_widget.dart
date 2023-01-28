@@ -37,10 +37,6 @@ class ContinueButtonWidget extends ConsumerWidget {
           if (nameController.text.isNotEmpty &&
               designationController.text.isNotEmpty &&
               bioController.text.isNotEmpty) {
-<<<<<<< HEAD
-=======
-
->>>>>>> 7714fb93152ea30b0a17350bda3db20c112ef955
             UserModel userDetails = UserModel(
               uid: _authState.uid,
               name: nameController.text,
@@ -62,19 +58,7 @@ class ContinueButtonWidget extends ConsumerWidget {
                   context, RoutePath.routeToForceProfileScreen);
             }
           } else {
-<<<<<<< HEAD
-            Fluttertoast.showToast(
-                msg: "Please fill all the fields",
-                toastLength: Toast.LENGTH_SHORT,
-                gravity: ToastGravity.BOTTOM,
-                timeInSecForIosWeb: 1,
-                backgroundColor: AppColor.googlegrey,
-                textColor: Colors.white,
-                fontSize: 14);
-=======
-
             toastWidget("Please fill all the fields");
->>>>>>> 7714fb93152ea30b0a17350bda3db20c112ef955
           }
         },
         padding: EdgeInsets.fromLTRB(20, 15, 20, 15),

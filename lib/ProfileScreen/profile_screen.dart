@@ -13,7 +13,6 @@ class ProfileScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-
     return Scaffold(
         drawer: const Menu(),
         appBar: PreferredSize(
@@ -38,8 +37,7 @@ class ProfileScreen extends StatelessWidget {
                 ),
                 child: Stack(
                   children: [
-                    const ToogleButton(),
-
+                    ToggleButton(),
                     //Stack 2
                     const ProfileHeaderWidget(),
                   ],

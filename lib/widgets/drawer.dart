@@ -1,4 +1,3 @@
-
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:hacknitr_round2/Providers/auth_providers.dart';
@@ -20,12 +19,11 @@ class Menu extends ConsumerWidget {
       child: Material(
         color: AppColor.secbgcolor,
         child: Container(
-          margin:
-          EdgeInsets.fromLTRB(30, screenHeight! * 0.12, screenWidth! * 0.05, 0),
+          margin: EdgeInsets.fromLTRB(
+              30, screenHeight! * 0.12, screenWidth! * 0.05, 0),
           child: Column(
             children: [
               HeaderWidget(),
-
               Padding(
                 padding: EdgeInsets.symmetric(vertical: screenHeight! * 0.03),
                 child: const Divider(
@@ -34,7 +32,6 @@ class Menu extends ConsumerWidget {
                   color: Colors.grey,
                 ),
               ),
-
               DrawerItem(
                 name: 'Nearby Connects',
                 icon: Icons.people_rounded,
@@ -76,37 +73,65 @@ class Menu extends ConsumerWidget {
                   onPressed: () {
                     _authService.signOut();
                     Navigator.pushReplacementNamed(
-                        context,
-                        RoutePath.routeToLoginScreen);
+                        context, RoutePath.routeToLoginScreen);
                   }),
-              SizedBox(height: screenHeight!*0.13),
+              SizedBox(height: screenHeight! * 0.13),
               Row(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
-                  Icon(Icons.file_copy, color: Colors.black,size: 16,),
-                  TextButton(onPressed: (){
-                    showLicensePage(context: context, applicationIcon: Image.asset(ImageAsset.applogo, height: 70,),applicationVersion: "1.2.1", applicationLegalese: "Copyright CodingReboot");
-                  }, child: Text(
-                    "Licenses", style: TextStyle(fontWeight: FontWeight.w600, color: Colors.black, fontSize: 16),
-                  ))
-
+                  Icon(
+                    Icons.file_copy,
+                    color: Colors.black,
+                    size: 16,
+                  ),
+                  TextButton(
+                      onPressed: () {
+                        showLicensePage(
+                            context: context,
+                            applicationIcon: Image.asset(
+                              ImageAsset.applogo,
+                              height: 70,
+                            ),
+                            applicationVersion: "1.2.1",
+                            applicationLegalese: "Copyright CodingReboot");
+                      },
+                      child: Text(
+                        "Licenses",
+                        style: TextStyle(
+                            fontWeight: FontWeight.w600,
+                            color: Colors.black,
+                            fontSize: 16),
+                      ))
                 ],
               ),
               Row(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
-                  TextButton(onPressed: (){
-                    launchExternalUrl("https://pages.flycricket.io/connecten/terms.html");
-                  },
+                  TextButton(
+                      onPressed: () {
+                        launchExternalUrl(
+                            "https://pages.flycricket.io/connecten/terms.html");
+                      },
                       child: Text(
-                    "Terms & Conditions", style: TextStyle(fontWeight: FontWeight.w600, color: Colors.black, fontSize: 10),
-                  )),
-                  SizedBox(width: screenWidth!*0.02),
-                  TextButton(onPressed: ()async{
-                    launchExternalUrl("https://pages.flycricket.io/connecten/privacy.html");
-                  }, child: Text(
-                    "Privacy Policy", style: TextStyle(fontWeight: FontWeight.w600, color: Colors.black, fontSize: 10),
-                  )),
+                        "Terms & Conditions",
+                        style: TextStyle(
+                            fontWeight: FontWeight.w600,
+                            color: Colors.black,
+                            fontSize: 10),
+                      )),
+                  SizedBox(width: screenWidth! * 0.02),
+                  TextButton(
+                      onPressed: () async {
+                        launchExternalUrl(
+                            "https://pages.flycricket.io/connecten/privacy.html");
+                      },
+                      child: Text(
+                        "Privacy Policy",
+                        style: TextStyle(
+                            fontWeight: FontWeight.w600,
+                            color: Colors.black,
+                            fontSize: 10),
+                      )),
                 ],
               )
             ],
@@ -115,32 +140,29 @@ class Menu extends ConsumerWidget {
       ),
     );
   }
+
   void onItemPressed(BuildContext context, {required int index}) {
     // final sp = context.read<SignInProvider>();
     Navigator.pop(context);
 
     switch (index) {
       case 0:
-        Navigator.pushReplacementNamed(
-            context, RoutePath.routeToNearbyScreen);
+        Navigator.pushReplacementNamed(context, RoutePath.routeToNearbyScreen);
         break;
       case 1:
         Navigator.pushReplacementNamed(
             context, RoutePath.routeToConnectionScreen);
         break;
       case 2:
-        Navigator.pushReplacementNamed(
-            context, RoutePath.routeToProfileScreen);
+        Navigator.pushReplacementNamed(context, RoutePath.routeToProfileScreen);
         break;
 
       case 3:
-        Navigator.pushReplacementNamed(
-            context, RoutePath.routeToProfileScreen);
+        Navigator.pushReplacementNamed(context, RoutePath.routeToProfileScreen);
         break;
     }
   }
 }
-
 
 class HeaderWidget extends ConsumerWidget {
   const HeaderWidget({Key? key}) : super(key: key);
@@ -154,7 +176,7 @@ class HeaderWidget extends ConsumerWidget {
           CircleAvatar(
             radius: screenHeight! * 0.055,
             backgroundImage: AssetImage(ImageAsset.applogo),
-            foregroundImage: NetworkImage(_authUser!.photoURL!),
+            foregroundImage: NetworkImage(_authUser.photoURL!),
           ),
           SizedBox(
             width: screenHeight! * 0.03,
@@ -183,6 +205,3 @@ class HeaderWidget extends ConsumerWidget {
     );
   }
 }
-
-
-
