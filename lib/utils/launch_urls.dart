@@ -1,3 +1,4 @@
+import 'package:hacknitr_round2/utils/fluttertoast.dart';
 import 'package:url_launcher/url_launcher.dart';
 
 Future<void> launchExternalUrl(String link) async {
@@ -6,6 +7,7 @@ Future<void> launchExternalUrl(String link) async {
     url,
     mode: LaunchMode.externalApplication,
   )) {
+    toastWidget("Something went wrong");
     throw 'Could not launch $url';
   }
 }

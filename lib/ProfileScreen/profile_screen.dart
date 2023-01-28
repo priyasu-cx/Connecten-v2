@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:hacknitr_round2/ProfileScreen/widgets/profile_header.dart';
 import 'package:hacknitr_round2/ProfileScreen/widgets/social_cards.dart';
 import 'package:hacknitr_round2/ProfileScreen/widgets/toggle_button.dart';
+import 'package:hacknitr_round2/Providers/database_provider.dart';
 import 'package:hacknitr_round2/utils/colors.dart';
 import 'package:hacknitr_round2/utils/size_config.dart';
 import 'package:hacknitr_round2/widgets/appbar.dart';
@@ -43,14 +45,20 @@ class ProfileScreen extends StatelessWidget {
                   ],
                 ),
               ),
-              Text(
-                "My Links",
-                style: TextStyle(
-                  letterSpacing: 1,
-                  fontSize: 20,
-                  fontWeight: FontWeight.w500,
-                ),
-                textAlign: TextAlign.left,
+              Row(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  Text(
+                    "My Links",
+                    style: TextStyle(
+                      letterSpacing: 1,
+                      fontSize: 20,
+                      fontWeight: FontWeight.w500,
+                    ),
+                    textAlign: TextAlign.left,
+                  ),
+                  LockButton(),
+                ],
               ),
               socialCard(context),
             ],
@@ -58,3 +66,19 @@ class ProfileScreen extends StatelessWidget {
         ));
   }
 }
+
+class LockButton extends ConsumerWidget {
+  const LockButton({Key? key}) : super(key: key);
+
+  @override
+  Widget build(BuildContext context, WidgetRef ref) {
+    final _userDetails = ref.watch(userDetailsProvider);
+    final _databaseUser = ref.watch(databaseProvider);
+    return IconButton(onPressed: (){
+      _userDetails.value!.isPrivate = !_userDetails.value!.isPrivate;
+      _databaseUser.updateUserData(_userDetails.value!);
+    },
+        icon: _userDetails.value!.isPrivate ? const Icon(Icons.lock_rounded) : const Icon(Icons.lock_open_rounded));
+  }
+}
+
