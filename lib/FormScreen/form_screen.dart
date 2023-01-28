@@ -72,7 +72,7 @@ class FormScreen extends ConsumerWidget {
       maxLines: 4,
       keyboardType: TextInputType.text,
       onSubmitted: (value) {
-        bioController.text = value!;
+        bioController.text = value;
       },
       textInputAction: TextInputAction.done,
       decoration: InputDecoration(
@@ -93,8 +93,8 @@ class FormScreen extends ConsumerWidget {
       borderRadius: BorderRadius.circular(30),
       child: MaterialButton(
         onPressed: () {
-          Toast.show("Profile Created",
-              duration: Toast.lengthShort, gravity: Toast.bottom);
+          // Toast.show("Profile Created",
+          //     duration: Toast.lengthShort, gravity: Toast.bottom);
 
           UserModel user = UserModel(
             uid: _authUser.uid,
