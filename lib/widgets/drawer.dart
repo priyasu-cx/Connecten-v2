@@ -122,7 +122,7 @@ class Menu extends ConsumerWidget {
     switch (index) {
       case 0:
         Navigator.pushReplacementNamed(
-            context, RoutePath.routeToLoginScreen);
+            context, RoutePath.routeToNearbyScreen);
         break;
       case 1:
         Navigator.pushReplacementNamed(
