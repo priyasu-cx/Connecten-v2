@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:hacknitr_round2/Models/user_models.dart';
 import 'package:hacknitr_round2/Providers/auth_providers.dart';
+import 'package:hacknitr_round2/Providers/database_provider.dart';
+import 'package:hacknitr_round2/routes/route_path.dart';
 import 'package:hacknitr_round2/utils/colors.dart';
 import 'package:hacknitr_round2/utils/size_config.dart';
 import 'package:toast/toast.dart';
@@ -20,6 +22,8 @@ class FormScreen extends ConsumerWidget {
   Widget build(BuildContext context, WidgetRef ref) {
     ToastContext().init(context);
     final _authUser = ref.watch(authUserProvider);
+    final _database = ref.watch(databaseProvider);
+
 
     /// Name field
     final nameField = TextFormField(
@@ -107,6 +111,8 @@ class FormScreen extends ConsumerWidget {
             portfolio: "",
             isPrivate: false,
           );
+          _database.addUserData(user);
+          Navigator.pushReplacementNamed(context, RoutePath.routeToProfileScreen);
         },
         padding: EdgeInsets.fromLTRB(20, 15, 20, 15),
         minWidth: MediaQuery.of(context).size.width * 0.5,
