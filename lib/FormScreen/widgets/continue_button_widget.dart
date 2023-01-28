@@ -5,6 +5,8 @@ import 'package:hacknitr_round2/Providers/auth_providers.dart';
 import 'package:hacknitr_round2/Providers/database_provider.dart';
 import 'package:hacknitr_round2/routes/route_path.dart';
 import 'package:hacknitr_round2/utils/colors.dart';
+import 'package:fluttertoast/fluttertoast.dart';
+import 'package:hacknitr_round2/utils/size_config.dart';
 
 class ContinueButtonWidget extends ConsumerWidget {
   const ContinueButtonWidget({
@@ -20,6 +22,8 @@ class ContinueButtonWidget extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
+    // ToastContext().init(context);
+
     final _authState = ref.watch(authUserProvider);
     final _databaseService = ref.watch(databaseProvider);
     return Material(
@@ -30,7 +34,9 @@ class ContinueButtonWidget extends ConsumerWidget {
         onPressed: () async {
           // Toast.show("Profile Created",
           //     duration: Toast.lengthShort, gravity: Toast.bottom);
-
+          if (nameController.text.isNotEmpty &&
+              designationController.text.isNotEmpty &&
+              bioController.text.isNotEmpty) {
           UserModel userDetails = UserModel(
             uid: _authState.uid,
             name: nameController.text,
@@ -50,6 +56,15 @@ class ContinueButtonWidget extends ConsumerWidget {
           if (state) {
             Navigator.pushReplacementNamed(
                 context, RoutePath.routeToForceProfileScreen);
+          }}else{
+            Fluttertoast.showToast(
+                msg: "Please fill all the fields",
+                toastLength: Toast.LENGTH_SHORT,
+                gravity: ToastGravity.BOTTOM,
+                timeInSecForIosWeb: 1,
+                backgroundColor: AppColor.googlegrey,
+                textColor: Colors.white,
+                fontSize: 14);
           }
         },
         padding: EdgeInsets.fromLTRB(20, 15, 20, 15),

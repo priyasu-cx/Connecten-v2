@@ -6,4 +6,5 @@ abstract class AppColor {
   static const buttoncolor = Color(0xff567DF4);
   static const secbgcolor = Color(0xffF1F3F6);
   static const cardcolor = Color(0xffEEF7FE);
+  static const googlegrey = Color(0xff616169);
 }
