@@ -2,8 +2,6 @@
 import 'package:flutter/material.dart';
 import 'package:hacknitr_round2/ProfileScreen/widgets/profile_header.dart';
 import 'package:hacknitr_round2/ProfileScreen/widgets/social_cards.dart';
-import 'package:hacknitr_round2/ProfileScreen/widgets/social_links.dart';
-import 'package:hacknitr_round2/utils/assets.dart';
 import 'package:hacknitr_round2/utils/colors.dart';
 import 'package:hacknitr_round2/utils/size_config.dart';
 import 'package:hacknitr_round2/widgets/appbar.dart';

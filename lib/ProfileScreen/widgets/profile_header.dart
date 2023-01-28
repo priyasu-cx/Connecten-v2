@@ -10,6 +10,7 @@ class ProfileHeaderContainer extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final _userDetails = ref.watch(userDetailsProvider);
+    print(_userDetails);
     return Container(
       padding: const EdgeInsets.all(40),
       child: Column(
@@ -23,7 +24,6 @@ class ProfileHeaderContainer extends ConsumerWidget {
           ),
           Text(
             _userDetails.value!.name,
-            // "hello",
             style: TextStyle(
               letterSpacing: 1,
               fontSize: 20,

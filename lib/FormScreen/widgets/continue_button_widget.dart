@@ -50,9 +50,10 @@ class ContinueButtonWidget extends ConsumerWidget {
             twitter: "",
             portfolio: "",
             isPrivate: false,
+            connectionCount: 0,
           );
           bool state = await _databaseService.addUserData(userDetails);
-          print(state);
+          // print(state);
           if (state) {
             Navigator.pushReplacementNamed(
                 context, RoutePath.routeToForceProfileScreen);
