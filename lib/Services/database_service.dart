@@ -25,6 +25,15 @@ class DatabaseService {
         UserModel.fromMap(snapshot.data() as Map<String, dynamic>?));
   }
 
+  // Stream<List<UserModel>?> allConnectionDetails(List<String> nearbyUsers) {
+  //   // List<UserModel> nearbyUserData = [];
+  //   nearbyUsers.forEach((element) {
+  //     _userCollection.doc(element).snapshots().map((snapshot) =>
+  //         UserModel.fromMap(snapshot.data() as Map<String, dynamic>?));
+  //   });
+  //   // return nearbyUserData;
+  // }
+
   Future<bool> addUserData(UserModel userDetails) async {
     _userCollection
         .doc(userDetails.uid)
