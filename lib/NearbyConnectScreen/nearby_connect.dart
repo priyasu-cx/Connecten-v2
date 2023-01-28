@@ -1,4 +1,3 @@
-
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:hacknitr_round2/Models/user_models.dart';
@@ -9,8 +8,6 @@ import 'package:hacknitr_round2/utils/size_config.dart';
 import 'package:hacknitr_round2/widgets/appbar.dart';
 import 'package:hacknitr_round2/widgets/drawer.dart';
 import 'package:hacknitr_round2/widgets/profile_dialog.dart';
-
-
 
 class NearbyConnect extends ConsumerStatefulWidget {
   const NearbyConnect({Key? key}) : super(key: key);
@@ -88,13 +85,16 @@ class _NearbyConnectState extends ConsumerState<NearbyConnect> {
     // final _userdata = ref.watch(nearbyConnectionsProvider);
     print("-------Connection IDs-------");
     print(cp.connections);
+    List<UserModel>? nearbyUsers = [];
 
-    List<UserModel>? nearbyUsers = DatabaseService().allConnectionDetails(cp.connections);
+    setState(() async {
+      // nearbyUsers = await DatabaseService().allConnectionDetails(cp.connections);
+      print("Outside check -> ");
+      print(nearbyUsers!.length);
+    });
+
     // nearbyUsers = _userdata
 
-
-    print("Outside check -> ");
-    print(nearbyUsers!.length);
     return Scaffold(
         drawer: const Menu(),
         appBar: PreferredSize(
@@ -119,28 +119,28 @@ class _NearbyConnectState extends ConsumerState<NearbyConnect> {
                     height: screenHeight! * 0.6,
                     //height: Get.height*0.5,
                     child: ListView.builder(
-                        itemCount: nearbyUsers.length,
+                        itemCount: nearbyUsers!.length,
                         itemBuilder: (context, i) {
                           //return Connect(userdata["fullname"], userdata["designation"]);
 
-                          return Connect(nearbyUsers[i], nearbyUsers[i].name, nearbyUsers[i].designation, context);
+                          return Connect(nearbyUsers![i], nearbyUsers![i].name,
+                              nearbyUsers![i].designation, context);
                         })),
               ),
             ],
           ),
         ));
   }
-
-
 }
 
 Widget Connect(allUserData, name, designation, context) {
-
   return InkWell(
-      onTap: (){ProfileDialog(allUserData, context);},
+      onTap: () {
+        ProfileDialog(allUserData, context);
+      },
       child: Container(
           alignment: Alignment.center,
-          padding: EdgeInsets.symmetric(vertical: 10,horizontal: 20),
+          padding: EdgeInsets.symmetric(vertical: 10, horizontal: 20),
           margin: EdgeInsets.only(bottom: 20),
           height: screenHeight! * 0.15,
           decoration: BoxDecoration(
@@ -185,14 +185,12 @@ Widget Connect(allUserData, name, designation, context) {
                   Align(
                       alignment: Alignment.centerRight,
                       child: IconButton(
-                        onPressed: () async{
+                        onPressed: () async {
                           // await sp.addConnection(allUserData["uid"]);
                           // Get.snackbar("Connection Added", allUserData["fullname"]);
                         },
                         icon: Icon(Icons.person_add_alt_1_rounded),
-                      )
-                  ),
-
+                      )),
                 ],
               )
             ],
