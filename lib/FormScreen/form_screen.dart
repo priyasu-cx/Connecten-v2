@@ -94,8 +94,8 @@ class FormScreen extends ConsumerWidget {
       borderRadius: BorderRadius.circular(30),
       child: MaterialButton(
         onPressed: () {
-          Toast.show("Profile Created",
-              duration: Toast.lengthShort, gravity: Toast.bottom);
+          // Toast.show("Profile Created",
+          //     duration: Toast.lengthShort, gravity: Toast.bottom);
 
           UserModel user = UserModel(
             uid: _authUser.uid,

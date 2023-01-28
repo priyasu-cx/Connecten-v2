@@ -1,7 +1,10 @@
 
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:hacknitr_round2/LoginScreen/login_screen.dart';
 import 'package:hacknitr_round2/ProfileScreen/profile_screen.dart';
+import 'package:hacknitr_round2/Providers/auth_providers.dart';
+import 'package:hacknitr_round2/routes/route_path.dart';
 import 'package:hacknitr_round2/utils/assets.dart';
 import 'package:hacknitr_round2/utils/colors.dart';
 import 'package:hacknitr_round2/utils/size_config.dart';
@@ -9,17 +12,12 @@ import 'package:url_launcher/url_launcher.dart';
 
 import 'drawer_item.dart';
 
-class Menu extends StatefulWidget {
+class Menu extends ConsumerWidget {
   const Menu({Key? key}) : super(key: key);
 
   @override
-  State<Menu> createState() => _MenuState();
-}
-
-class _MenuState extends State<Menu> {
-  @override
-  Widget build(BuildContext context) {
-    // final sp = context.read<SignInProvider>();
+  Widget build(BuildContext context, WidgetRef ref) {
+    final _authService = ref.watch(authServicesProvider);
     return Drawer(
       child: Material(
         color: AppColor.secbgcolor,
@@ -28,18 +26,17 @@ class _MenuState extends State<Menu> {
           EdgeInsets.fromLTRB(30, screenHeight! * 0.12, screenWidth! * 0.05, 0),
           child: Column(
             children: [
-              headerWidget(),
-              SizedBox(
-                height: screenHeight! * 0.05,
+              HeaderWidget(),
+
+              Padding(
+                padding: EdgeInsets.symmetric(vertical: screenHeight! * 0.03),
+                child: const Divider(
+                  thickness: 1,
+                  height: 10,
+                  color: Colors.grey,
+                ),
               ),
-              const Divider(
-                thickness: 1,
-                height: 10,
-                color: Colors.grey,
-              ),
-              SizedBox(
-                height: screenHeight! * 0.05,
-              ),
+
               DrawerItem(
                 name: 'Nearby Connects',
                 icon: Icons.people_rounded,
@@ -81,7 +78,12 @@ class _MenuState extends State<Menu> {
               DrawerItem(
                   name: 'Log out',
                   icon: Icons.logout,
-                  onPressed: () => onItemPressed(context, index: 4)),
+                  onPressed: () {
+                    _authService.signOut();
+                    Navigator.pushReplacementNamed(
+                        context,
+                        RoutePath.routeToLoginScreen);
+                  }),
               SizedBox(height: screenHeight!*0.13),
               Row(
                 mainAxisAlignment: MainAxisAlignment.center,
@@ -135,7 +137,6 @@ class _MenuState extends State<Menu> {
       ),
     );
   }
-
   void onItemPressed(BuildContext context, {required int index}) {
     // final sp = context.read<SignInProvider>();
     Navigator.pop(context);
@@ -160,26 +161,28 @@ class _MenuState extends State<Menu> {
         break;
 
       case 4:
-        // sp.userSignOut();
+      // sp.userSignOut();
         Navigator.push(
             context, MaterialPageRoute(builder: (context) => LoginScreen()));
         break;
     }
   }
+}
 
-  Widget headerWidget() {
-    // final sp = context.read<SignInProvider>();
-    // final datacount = GetStorage();
-    // final fullname = datacount.read("fullname");
-    // final imageUrl = datacount.read("imageUrl");
-    const url =
-        'https://icon-library.com/images/avatar-icon-images/avatar-icon-images-4.jpg';
+
+class HeaderWidget extends ConsumerWidget {
+  const HeaderWidget({Key? key}) : super(key: key);
+
+  @override
+  Widget build(BuildContext context, WidgetRef ref) {
+    final _authUser = ref.watch(authUserProvider);
     return Container(
       child: Row(
         children: [
           CircleAvatar(
             radius: screenHeight! * 0.055,
-            backgroundImage: AssetImage(ImageAsset.profileAvatar),
+            backgroundImage: AssetImage(ImageAsset.applogo),
+            foregroundImage: NetworkImage(_authUser!.photoURL!),
           ),
           SizedBox(
             width: screenHeight! * 0.03,
@@ -188,7 +191,7 @@ class _MenuState extends State<Menu> {
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                Text("fullname",
+                Text(_authUser.displayName ?? "Coding Reboot",
                     overflow: TextOverflow.ellipsis,
                     style: TextStyle(
                         fontSize: 16,
@@ -197,7 +200,7 @@ class _MenuState extends State<Menu> {
                 SizedBox(
                   height: 10,
                 ),
-                Text("sp.email!",
+                Text(_authUser.email ?? "test@mail.com",
                     overflow: TextOverflow.ellipsis,
                     style: TextStyle(fontSize: 14, color: Colors.black))
               ],
@@ -208,5 +211,6 @@ class _MenuState extends State<Menu> {
     );
   }
 }
+
 
 
