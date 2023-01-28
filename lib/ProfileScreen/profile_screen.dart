@@ -5,6 +5,7 @@ import 'package:hacknitr_round2/ProfileScreen/widgets/social_cards.dart';
 import 'package:hacknitr_round2/ProfileScreen/widgets/toggle_button.dart';
 import 'package:hacknitr_round2/Providers/database_provider.dart';
 import 'package:hacknitr_round2/utils/colors.dart';
+import 'package:hacknitr_round2/utils/fluttertoast.dart';
 import 'package:hacknitr_round2/utils/size_config.dart';
 import 'package:hacknitr_round2/widgets/appbar.dart';
 import 'package:hacknitr_round2/widgets/drawer.dart';
@@ -80,6 +81,7 @@ class LockButton extends ConsumerWidget {
     return IconButton(onPressed: (){
       _userDetails.value!.isPrivate = !_userDetails.value!.isPrivate;
       _databaseUser.updateUserData(_userDetails.value!);
+      _userDetails.value!.isPrivate ? toastWidget("Profile Locked") : toastWidget("Profile Unlocked");
     },
         icon: _userDetails.value!.isPrivate ? const Icon(Icons.lock_rounded) : const Icon(Icons.lock_open_rounded));
   }

@@ -86,6 +86,7 @@ class LinkDialog extends ConsumerWidget {
   Widget build(BuildContext context, WidgetRef ref) {
     final _currentUser = ref.watch(userDetailsProvider);
     final _databaseUser = ref.watch(databaseProvider);
+    UserModel userDetails = _currentUser.value!;
     final myController = TextEditingController();
     return Dialog(
         shape: RoundedRectangleBorder(
@@ -113,19 +114,19 @@ class LinkDialog extends ConsumerWidget {
                         autofocus: true,
                         decoration: InputDecoration(
                             hintText: index == 1
-                                ? "https://www.linkedin.com/"
+                                ? userDetails.linkedin
                                 : index == 2
-                                ? "https://github.com/"
+                                ? userDetails.github
                                 : index == 3
-                                ? "https://yoursite.com/"
-                                : "https://twitter.com/"),
+                                ? userDetails.portfolio
+                                : userDetails.twitter),
                       ),
                       TextButton(
                           onPressed: () {
                             Navigator.of(context).pop();
 
                             /// TODO: Add link to database
-                            UserModel userDetails = _currentUser.value!;
+                            // UserModel userDetails = _currentUser.value!;
                             switch(index) {
                               case 1:
                                 userDetails.linkedin = myController.text;
