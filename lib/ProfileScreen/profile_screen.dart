@@ -1,10 +1,12 @@
 
 import 'package:flutter/material.dart';
 import 'package:hacknitr_round2/ProfileScreen/widgets/profile_header.dart';
+import 'package:hacknitr_round2/ProfileScreen/widgets/social_cards.dart';
 import 'package:hacknitr_round2/ProfileScreen/widgets/social_links.dart';
 import 'package:hacknitr_round2/utils/assets.dart';
 import 'package:hacknitr_round2/utils/colors.dart';
 import 'package:hacknitr_round2/utils/size_config.dart';
+import 'package:hacknitr_round2/widgets/appbar.dart';
 import 'package:hacknitr_round2/widgets/drawer.dart';
 import 'package:sliding_switch/sliding_switch.dart';
 
@@ -16,24 +18,11 @@ class ProfileScreen extends StatelessWidget {
 
     return Scaffold(
         drawer: const Menu(),
-        appBar: AppBar(
-          toolbarHeight: screenHeight! * 0.12,
-          automaticallyImplyLeading: false,
-          backgroundColor: Colors.transparent,
-          shadowColor: AppColor.primarybgcolor,
-          elevation: 0.0,
-          leading: Builder(
-            builder: (context) => IconButton(
-              splashRadius: 1,
-              padding: const EdgeInsets.fromLTRB(30, 40, 0, 25),
-              onPressed: () {
-                Scaffold.of(context).openDrawer();
-              },
-              icon: const Icon(Icons.menu, color: AppColor.arrowcolor),
-              alignment: Alignment.centerLeft,
-            ),
-          ),
+        appBar: PreferredSize(
+          preferredSize: Size.fromHeight(screenHeight! * 0.1),
+          child: CustomAppbar(context),
         ),
+        
         body: SingleChildScrollView(
           child: Column(
             children: [
@@ -102,41 +91,7 @@ class ProfileScreen extends StatelessWidget {
                 ),
                 textAlign: TextAlign.left,
               ),
-              Container(
-                padding: EdgeInsets.all(20),
-                child: Column(
-                  children: [
-                    Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceAround,
-                        children: [
-                          social(context, 1, ImageAsset.linkedinlogo, "Linkedin",
-                              "link"),
-                          social(context, 2, ImageAsset.githublogo, "Github",
-                              "link"),
-                        ]),
-                    Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceAround,
-                        children: [
-                          social(context, 3, ImageAsset.websitelogo, "Portfolio",
-                              "link"),
-                          social(context, 4, ImageAsset.twitterlogo, "Twitter",
-                              "link"),
-                        ]),
-                    SizedBox(
-                      height: screenHeight! * 0.02,
-                    ),
-                    Text(
-                      "Click to edit",
-                      textAlign: TextAlign.center,
-                      style: TextStyle(
-                        letterSpacing: 1,
-                        fontSize: 18,
-                        fontWeight: FontWeight.w600,
-                      ),
-                    )
-                  ],
-                ),
-              )
+              socialCard(context),
             ],
           ),
         ));
