@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:hacknitr_round2/Providers/auth_providers.dart';
-import 'package:hacknitr_round2/LoginScreen/widgets/signin_button.dart';
+import 'package:hacknitr_round2/utils/assets.dart';
 import 'package:hacknitr_round2/utils/size_config.dart';
 
 class LoginScreen extends StatefulWidget {
@@ -21,7 +21,7 @@ class _LoginScreenState extends State<LoginScreen> {
         body: Stack(
           children: [
             Image.asset(
-              "assets/login.png",
+              ImageAsset.loginScreenBg,
               width: screenWidth!,
               scale: 0.8,
             ),
@@ -32,29 +32,29 @@ class _LoginScreenState extends State<LoginScreen> {
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   mainAxisAlignment: MainAxisAlignment.end,
-                  children: [
-                    const Text(
+                  children: const [
+                    Text(
                       "Welcome to",
                       style: TextStyle(
                         fontSize: 20,
                         fontWeight: FontWeight.w300,
                       ),
                     ),
-                    const Text(
+                    Text(
                       "ConnecTen",
                       style: TextStyle(
                         fontSize: 38,
                         fontWeight: FontWeight.w900,
                       ),
                     ),
-                    const Text(
+                    Text(
                       "\nBest community connection platform \nfor all meetups and events to \nconnect hassle free.",
                       style: TextStyle(
                         fontSize: 14,
                         fontWeight: FontWeight.w500,
                       ),
                     ),
-                    const Text(
+                    Text(
                       "\nJoin For Free.",
                       style: TextStyle(
                         fontSize: 14,

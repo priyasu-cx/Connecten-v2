@@ -3,9 +3,11 @@ import 'package:flutter/material.dart';
 import 'package:hacknitr_round2/utils/assets.dart';
 import 'package:hacknitr_round2/utils/colors.dart';
 import 'package:hacknitr_round2/utils/size_config.dart';
+import 'package:hacknitr_round2/widgets/drawer.dart';
 import 'package:sliding_switch/sliding_switch.dart';
 
-import '../widgets/drawer.dart';
+import '../Providers/connection_provider.dart';
+
 
 
 class ProfileScreen extends StatefulWidget {
