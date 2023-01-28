@@ -64,16 +64,13 @@ class Menu extends ConsumerWidget {
                   name: 'Upcoming Events',
                   icon: Icons.event_available,
                   onPressed: () => onItemPressed(context, index: 3)),
-              SizedBox(
-                height: screenHeight! * 0.03,
-              ),
-              const Divider(
-                thickness: 1,
-                height: 10,
-                color: Colors.grey,
-              ),
-              SizedBox(
-                height: screenHeight! * 0.03,
+              Padding(
+                padding: EdgeInsets.symmetric(vertical: screenHeight! * 0.03),
+                child: const Divider(
+                  thickness: 1,
+                  height: 10,
+                  color: Colors.grey,
+                ),
               ),
               DrawerItem(
                   name: 'Log out',
