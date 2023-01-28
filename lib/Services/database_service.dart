@@ -19,4 +19,14 @@ class DatabaseService {
     return _userCollection.doc(_authUser!.uid).snapshots().map((snapshot) =>
         UserModel.fromMap(snapshot.data() as Map<String, dynamic>?));
   }
+
+  Future<bool> addUserData(UserModel userDetails) async {
+    _userCollection
+        .doc(userDetails.uid)
+        .set(userDetails)
+        .onError((error, stackTrace) {
+      return false;
+    });
+    return true;
+  }
 }
