@@ -1,14 +1,12 @@
 
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:hacknitr_round2/LoginScreen/login_screen.dart';
-import 'package:hacknitr_round2/ProfileScreen/profile_screen.dart';
 import 'package:hacknitr_round2/Providers/auth_providers.dart';
 import 'package:hacknitr_round2/routes/route_path.dart';
 import 'package:hacknitr_round2/utils/assets.dart';
 import 'package:hacknitr_round2/utils/colors.dart';
+import 'package:hacknitr_round2/utils/launch_urls.dart';
 import 'package:hacknitr_round2/utils/size_config.dart';
-import 'package:url_launcher/url_launcher.dart';
 
 import 'drawer_item.dart';
 
@@ -97,37 +95,20 @@ class Menu extends ConsumerWidget {
               Row(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
-                  TextButton(onPressed: ()async{
-                    var url = Uri.parse("https://pages.flycricket.io/connecten/terms.html");
-
-                    if (await canLaunchUrl(url)) {
-                      // LaunchMode.externalApplication;
-                      await launchUrl(url);
-                    } else {
-                      throw 'Could not launch $url';
-                    }
-                  }, child: Text(
+                  TextButton(onPressed: (){
+                    launchExternalUrl("https://pages.flycricket.io/connecten/terms.html");
+                  },
+                      child: Text(
                     "Terms & Conditions", style: TextStyle(fontWeight: FontWeight.w600, color: Colors.black, fontSize: 10),
                   )),
                   SizedBox(width: screenWidth!*0.02),
                   TextButton(onPressed: ()async{
-
-                    var url = Uri.parse("https://pages.flycricket.io/connecten/privacy.html");
-
-                    if (await canLaunchUrl(url)) {
-                      // LaunchMode.externalApplication;
-                      await launchUrl(url);
-                    } else {
-                      throw 'Could not launch $url';
-                    }
-
+                    launchExternalUrl("https://pages.flycricket.io/connecten/privacy.html");
                   }, child: Text(
                     "Privacy Policy", style: TextStyle(fontWeight: FontWeight.w600, color: Colors.black, fontSize: 10),
                   )),
-
                 ],
               )
-
             ],
           ),
         ),
@@ -140,27 +121,21 @@ class Menu extends ConsumerWidget {
 
     switch (index) {
       case 0:
-        Navigator.push(
-            context, MaterialPageRoute(builder: (context) => const LoginScreen()));
+        Navigator.pushReplacementNamed(
+            context, RoutePath.routeToLoginScreen);
         break;
       case 1:
-        Navigator.push(
-            context, MaterialPageRoute(builder: (context) => const LoginScreen()));
+        Navigator.pushReplacementNamed(
+            context, RoutePath.routeToLoginScreen);
         break;
       case 2:
-        Navigator.push(
-            context, MaterialPageRoute(builder: (context) => const ProfileScreen()));
+        Navigator.pushReplacementNamed(
+            context, RoutePath.routeToProfileScreen);
         break;
 
       case 3:
-        Navigator.push(
-            context, MaterialPageRoute(builder: (context) => const LoginScreen()));
-        break;
-
-      case 4:
-      // sp.userSignOut();
-        Navigator.push(
-            context, MaterialPageRoute(builder: (context) => LoginScreen()));
+        Navigator.pushReplacementNamed(
+            context, RoutePath.routeToProfileScreen);
         break;
     }
   }

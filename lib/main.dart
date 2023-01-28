@@ -5,9 +5,11 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:hacknitr_round2/firebase_options.dart';
 import 'package:hacknitr_round2/routes/app_route.dart';
 import 'package:hacknitr_round2/utils/size_config.dart';
+import 'package:toast/toast.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
+
   await Firebase.initializeApp(
     options: DefaultFirebaseOptions.currentPlatform,
   );
@@ -20,6 +22,7 @@ class MyApp extends StatelessWidget {
   // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
+    ToastContext().init(context);
     return LayoutBuilder(
       builder: (BuildContext context, BoxConstraints constraints) {
         return OrientationBuilder(

@@ -19,7 +19,7 @@ class ProfileScreen extends StatelessWidget {
     return Scaffold(
         drawer: const Menu(),
         appBar: PreferredSize(
-          preferredSize: Size.fromHeight(screenHeight! * 0.1),
+          preferredSize: Size.fromHeight(screenHeight! * 0.12),
           child: CustomAppbar(context),
         ),
         

@@ -20,7 +20,7 @@ class FormScreen extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    ToastContext().init(context);
+
     final _authUser = ref.watch(authUserProvider);
     final _database = ref.watch(databaseProvider);
 
@@ -93,26 +93,33 @@ class FormScreen extends ConsumerWidget {
       color: AppColor.buttoncolor,
       borderRadius: BorderRadius.circular(30),
       child: MaterialButton(
-        onPressed: () {
-          // Toast.show("Profile Created",
-          //     duration: Toast.lengthShort, gravity: Toast.bottom);
-
-          UserModel user = UserModel(
-            uid: _authUser.uid,
-            name: nameController.text,
-            designation: designationController.text,
-            bio: bioController.text,
-            email: _authUser.email!,
-            imageURL: _authUser.photoURL!,
-            connectedList: [],
-            github: "",
-            linkedin: "",
-            twitter: "",
-            portfolio: "",
-            isPrivate: false,
-          );
-          _database.addUserData(user);
-          Navigator.pushReplacementNamed(context, RoutePath.routeToProfileScreen);
+        onPressed: ()
+    {
+      // Toast.show("Profile Created",
+      //     duration: Toast.lengthShort, gravity: Toast.bottom);
+      if (nameController.text.isNotEmpty &&
+          designationController.text.isNotEmpty &&
+          bioController.text.isNotEmpty){
+        UserModel user = UserModel(
+          uid: _authUser.uid,
+          name: nameController.text,
+          designation: designationController.text,
+          bio: bioController.text,
+          email: _authUser.email!,
+          imageURL: _authUser.photoURL!,
+          connectedList: [],
+          github: "",
+          linkedin: "",
+          twitter: "",
+          portfolio: "",
+          isPrivate: false,
+        );
+      _database.addUserData(user);
+      Navigator.pushReplacementNamed(context, RoutePath.routeToProfileScreen);
+    }
+          else{
+          Toast.show("Please fill all the fields", duration: Toast.lengthShort, gravity: Toast.bottom);
+          }
         },
         padding: EdgeInsets.fromLTRB(20, 15, 20, 15),
         minWidth: MediaQuery.of(context).size.width * 0.5,
