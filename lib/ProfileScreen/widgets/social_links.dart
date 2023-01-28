@@ -1,6 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:hacknitr_round2/Models/user_models.dart';
+import 'package:hacknitr_round2/Providers/auth_providers.dart';
+import 'package:hacknitr_round2/Providers/database_provider.dart';
 import 'package:hacknitr_round2/utils/assets.dart';
+import 'package:hacknitr_round2/utils/fluttertoast.dart';
 import 'package:hacknitr_round2/utils/size_config.dart';
 
 class social extends ConsumerWidget {
@@ -15,7 +19,7 @@ class social extends ConsumerWidget {
     required this.text,
   }) : super(key: key);
 
-  openDialog(image, text, index, context) => showDialog(
+  openDialog(image, text, index, usermodel, context) => showDialog(
         context: context,
         builder: (context) {
           // final sp = context.read<SignInProvider>();
@@ -59,16 +63,14 @@ class social extends ConsumerWidget {
                                   Navigator.of(context).pop();
 
                                   /// TODO: Add link to database
-                                  // index == 1
-                                  //     ? sp.setLinkedIn(myController.text)
-                                  //     : index == 2
-                                  //     ? sp.setGithub(myController.text)
-                                  //     : index == 3
-                                  //     ? sp.setPortfolio(
-                                  //     myController.text)
-                                  //     : sp.setTwitter(
-                                  //     myController.text);
-                                  // Get.snackbar("Link Submitted", "");
+                                  index == 1
+                                      ? usermodel.linkedin = myController.text
+                                      : index == 2
+                                      ? usermodel.github = myController.text
+                                      : index == 3
+                                      ? usermodel.website = myController.text
+                                      : usermodel.twitter = myController.text;
+                                  toastWidget("Link Added");
                                 },
                                 child: Text(
                                   'SUBMIT',
@@ -98,9 +100,12 @@ class social extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
+    final _currentUser = ref.watch(userDetailsProvider);
+    final _databaseUser = ref.watch(databaseProvider);
     return GestureDetector(
         onTap: () {
-          openDialog(image, text, index, context);
+          UserModel userData = openDialog(image, text, index, _currentUser.value,context);
+          _databaseUser.updateUserData(userData);
         },
         child: Container(
           width: screenWidth! * 0.32,
@@ -139,3 +144,13 @@ class social extends ConsumerWidget {
         ));
   }
 }
+
+class openDialog extends ConsumerWidget {
+  const openDialog({Key? key}) : super(key: key);
+
+  @override
+  Widget build(BuildContext context, WidgetRef ref) {
+    return const Placeholder();
+  }
+}
+
