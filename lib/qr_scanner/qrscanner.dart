@@ -61,24 +61,32 @@ class _QRScanState extends ConsumerState<QRScan> {
     this.controller = controller;
     controller.scannedDataStream.listen((scanData) async {
       controller.pauseCamera();
-      await showDialog(
-        context: context,
-        builder: (context) => AlertDialog(
-          title: const Text('Scan Result'),
-          content: Text(scanData.code!),
-          actions: [
-            TextButton(
-              onPressed: () {
-                final databaseUser = ref.read(userDetailsWithIdProvider(scanData.code!)).value;
-                ProfileDialog(databaseUser!, context);
+      DatabaseService().userDetailsWithID(scanData.code!).listen((userData) {
+        if (userData != null) {
+          ProfileDialog(userData, context);
 
+        }
+      });
+      // final databaseUser = ref.watch(userDetailsWithIdProvider(scanData.code!));
 
-                Navigator.pop(context);},
-              child: const Text('OK'),
-            ),
-          ],
-        ),
-      );
+      // await showDialog(
+      //   context: context,
+      //   builder: (context) => AlertDialog(
+      //     title: const Text('Scan Result'),
+      //     content: Text(scanData.code!),
+      //     actions: [
+      //       TextButton(
+      //         onPressed: () {
+      //           final databaseUser = ref.read(userDetailsWithIdProvider(scanData.code!)).value;
+      //           ProfileDialog(databaseUser!, context);
+      //
+      //
+      //           Navigator.pop(context);},
+      //         child: const Text('OK'),
+      //       ),
+      //     ],
+      //   ),
+      // );
     });
   }
 
