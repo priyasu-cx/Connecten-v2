@@ -1,10 +1,10 @@
-
 import 'package:flutter/material.dart';
+import 'package:hacknitr_round2/Models/user_models.dart';
 import 'package:hacknitr_round2/utils/colors.dart';
 import 'package:hacknitr_round2/utils/launch_urls.dart';
 import 'package:hacknitr_round2/utils/size_config.dart';
 
-Future ProfileDialog(allUserData, context) => showDialog(
+Future ProfileDialog(UserModel allUserData, context) => showDialog(
     context: context,
     builder: (context) {
       return AlertDialog(
@@ -19,12 +19,28 @@ Future ProfileDialog(allUserData, context) => showDialog(
                   radius: screenWidth! * 0.1,
                   backgroundColor: AppColor.primarybgcolor,
                   backgroundImage: AssetImage("assets/Avatar.png"),
-                  foregroundImage: NetworkImage(allUserData["imageUrl"]),
+                  foregroundImage: NetworkImage(allUserData.imageURL),
                   //foregroundImage: sp.imageUrl == null ? AssetImage("assets/Avatar.png") : NetworkImage(sp.imageUrl),
                   //foregroundImage: NetworkImage(sp.imageUrl!),
                 ),
                 SizedBox(
                   height: screenHeight! * 0.01,
+                ),
+                Text(
+                  allUserData.name,
+                  style: TextStyle(
+                    color: Colors.black,
+                    fontWeight: FontWeight.w600,
+                    fontSize: screenWidth! * 0.05,
+                  ),
+                ),
+                Padding(
+                  padding: EdgeInsets.symmetric(vertical: screenHeight! * 0.01),
+                  child: Text(allUserData.connectedList!.length.toString() +
+                      " Connections"),
+                ),
+                SizedBox(
+                  height: screenHeight! * 0.03,
                 ),
                 Text(
                   "Social Links",
@@ -42,13 +58,13 @@ Future ProfileDialog(allUserData, context) => showDialog(
                     crossAxisAlignment: CrossAxisAlignment.stretch,
                     children: [
                       social_link(context, 1, "assets/linkedin.png", "Linkedin",
-                          allUserData["linkedIn"]),
+                          allUserData.linkedin),
                       social_link(context, 2, "assets/github.png", "Github",
-                          allUserData["github"]),
+                          allUserData.github),
                       social_link(context, 3, "assets/website.png", "Portfolio",
-                          allUserData["portfolio"]),
+                          allUserData.portfolio),
                       social_link(context, 4, "assets/twitter.png", "Twitter",
-                          allUserData["twitter"]),
+                          allUserData.twitter),
                     ],
                   ),
                 )

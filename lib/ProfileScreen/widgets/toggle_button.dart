@@ -12,10 +12,21 @@ class ToggleButton extends ConsumerStatefulWidget {
 }
 
 class _ToggleButtonState extends ConsumerState<ToggleButton> {
+  // bool state = true;
   @override
   Widget build(BuildContext context) {
     final cp = ref.watch(connectionProvider);
     final _authUser = ref.watch(authUserProvider);
+
+    // if (state) {
+    //   setState(() {
+    //     print("-------------------------");
+    //     cp.disableAdvertising();
+    //     cp.enableDiscovery(_authUser.uid, context);
+    //     state = false;
+    //   });
+    // }
+
     return Container(
       padding: EdgeInsets.symmetric(vertical: 20, horizontal: 20),
       alignment: Alignment.topRight,

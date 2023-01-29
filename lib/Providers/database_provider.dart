@@ -18,18 +18,7 @@ final userDetailsWithIdProvider =
   return ref.watch(databaseProvider).userDetailsWithID(id);
 }));
 
-// final nearbyConnectionsProvider =
-//     StateProvider.family<List<UserModel>?, List<String>>(((ref, nearbyUsers) {
-//   return ref.watch(databaseProvider).allConnectionDetails(nearbyUsers);
-// }));
-
-// final nearbyConnectionsProvider = Provider.autoDispose
-//     .family<List<UserModel>?, List<String>>((ref, nearbyUsers) {
-//   final _databaseProvider = ref.watch(databaseProvider);
-
-//   List<UserModel> nearbyData = [];
-
-//   for (var id in nearbyUsers) {
-//     nearbyData.add(_databaseProvider.userDetailsWithID(id).);
-//   }
-// });
+final nearbyConnectionsProvider =
+    FutureProvider.family<List<UserModel>?, List<String>>(((ref, nearbyUsers) {
+  return ref.watch(databaseProvider).getNearbyData(nearbyUsers);
+}));

@@ -25,7 +25,7 @@ class DatabaseService {
         UserModel.fromMap(snapshot.data() as Map<String, dynamic>?));
   }
 
-  Future<List<UserModel>> getNearbyData(List<String> nearbyUsers) async {
+  Future<List<UserModel>?> getNearbyData(List<String> nearbyUsers) async {
     List<UserModel> nearbyData = [];
     for (var id in nearbyUsers) {
       await _userCollection.doc(id).get().then((value) {
@@ -33,30 +33,8 @@ class DatabaseService {
             .add(UserModel.fromMap(value.data() as Map<String, dynamic>?));
       });
     }
-    print(nearbyData);
     return nearbyData;
   }
-
-  // List<UserModel>? allConnectionDetails(List<String> nearbyUsers) {
-  //   List<UserModel> nearbyUserData = [];
-  //   nearbyUsers.forEach((element) {
-  //     nearbyUserData
-  //           .add(await userDetailsWithID(element));
-  //     });
-  //   });
-  //   // for (var uid in nearbyUsers) {
-  //   //   var data = _userCollection.doc(uid).snapshots().map((snapshot) =>
-  //   //       UserModel.fromMap(snapshot.data() as Map<String, dynamic>?));
-
-  //   //   nearbyUserData.add(data);
-  //   // }
-  //   // nearbyUsers.forEach((element) {
-  //   //   // nearbyUserData.add();
-  //   //   UserModel data = _userCollection.doc(element).snapshots().map((snapshot) =>
-  //   //       UserModel.fromMap(snapshot.data() as Map<String, dynamic>?));
-  //   // });
-  //   return nearbyUserData;
-  // }
 
   Future<bool> addUserData(UserModel userDetails) async {
     _userCollection
@@ -71,9 +49,4 @@ class DatabaseService {
   Future<void> updateUserData(UserModel userDetails) async {
     _userCollection.doc(userDetails.uid).update(userDetails.ToMap(userDetails));
   }
-
-  // Stream<List<UserModel?>> getNearbyData(List<String> nearbyUsers) {
-
-  // }
-
 }
