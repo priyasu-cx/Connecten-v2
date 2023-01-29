@@ -46,21 +46,7 @@ class ProfileScreen extends StatelessWidget {
                   ],
                 ),
               ),
-              Row(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  Text(
-                    "My Links",
-                    style: TextStyle(
-                      letterSpacing: 1,
-                      fontSize: 20,
-                      fontWeight: FontWeight.w500,
-                    ),
-                    textAlign: TextAlign.left,
-                  ),
-                  LockButton(),
-                ],
-              ),
+            LockButton(),
               socialCard(context),
             ],
           ),
@@ -73,14 +59,32 @@ class LockButton extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
+
     final _userDetails = ref.watch(userDetailsProvider);
     final _databaseUser = ref.watch(databaseProvider);
-    return IconButton(onPressed: (){
-      _userDetails.value!.isPrivate = !_userDetails.value!.isPrivate;
-      _databaseUser.updateUserData(_userDetails.value!);
-      _userDetails.value!.isPrivate ? toastWidget("Profile Locked") : toastWidget("Profile Unlocked");
+
+    bool profileState = _userDetails.value!.isPrivate;
+    return Row(
+      mainAxisAlignment: MainAxisAlignment.center,
+      children: [
+        const Text(
+          "My Links",
+          style: TextStyle(
+            letterSpacing: 1,
+            fontSize: 20,
+            fontWeight: FontWeight.w500,
+          ),
+          textAlign: TextAlign.left,
+        ),
+    IconButton(onPressed: (){
+    _userDetails.value!.isPrivate = !_userDetails.value!.isPrivate;
+    _databaseUser.updateUserData(_userDetails.value!);
+    _userDetails.value!.isPrivate ? {toastWidget("Profile Locked")
+    } : toastWidget("Profile Unlocked");
     },
-        icon: _userDetails.value!.isPrivate ? const Icon(Icons.lock_rounded) : const Icon(Icons.lock_open_rounded));
+    icon: Icon(profileState ? Icons.lock_rounded : Icons.lock_open_rounded,)),
+      ],
+    );
   }
 }
 

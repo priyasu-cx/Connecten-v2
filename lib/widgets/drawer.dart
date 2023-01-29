@@ -55,10 +55,10 @@ class Menu extends ConsumerWidget {
               SizedBox(
                 height: screenHeight! * 0.03,
               ),
-              DrawerItem(
-                  name: 'Upcoming Events',
-                  icon: Icons.event_available,
-                  onPressed: () => onItemPressed(context, index: 3)),
+              // DrawerItem(
+              //     name: 'Upcoming Events',
+              //     icon: Icons.event_available,
+              //     onPressed: () => onItemPressed(context, index: 3)),
               Padding(
                 padding: EdgeInsets.symmetric(vertical: screenHeight! * 0.03),
                 child: const Divider(
@@ -75,7 +75,7 @@ class Menu extends ConsumerWidget {
                     Navigator.pushReplacementNamed(
                         context, RoutePath.routeToLoginScreen);
                   }),
-              SizedBox(height: screenHeight! * 0.13),
+              SizedBox(height: screenHeight! * 0.18),
               Row(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
