@@ -46,12 +46,12 @@ class ProfileScreen extends StatelessWidget {
                   ],
                 ),
               ),
-              SizedBox(
-                width: screenWidth!,
-                child: Row(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: [
-                    Text(
+              Row(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  Padding(
+                    padding: EdgeInsets.only(right: screenWidth! * 0.05),
+                    child: Text(
                       "My Links",
                       style: TextStyle(
                         letterSpacing: 1,
@@ -60,9 +60,9 @@ class ProfileScreen extends StatelessWidget {
                       ),
                       textAlign: TextAlign.left,
                     ),
-                    LockButton(),
-                  ],
-                ),
+                  ),
+                  LockButton(),
+                ],
               ),
               socialCard(context),
             ],
@@ -78,12 +78,34 @@ class LockButton extends ConsumerWidget {
   Widget build(BuildContext context, WidgetRef ref) {
     final _userDetails = ref.watch(userDetailsProvider);
     final _databaseUser = ref.watch(databaseProvider);
-    return IconButton(onPressed: (){
-      _userDetails.value!.isPrivate = !_userDetails.value!.isPrivate;
-      _databaseUser.updateUserData(_userDetails.value!);
-      _userDetails.value!.isPrivate ? toastWidget("Profile Locked") : toastWidget("Profile Unlocked");
-    },
-        icon: _userDetails.value!.isPrivate ? const Icon(Icons.lock_rounded) : const Icon(Icons.lock_open_rounded));
+    return Container(
+      child: InkWell(
+        onTap: () {
+          _userDetails.value!.isPrivate = !_userDetails.value!.isPrivate;
+          _databaseUser.updateUserData(_userDetails.value!);
+          _userDetails.value!.isPrivate
+              ? toastWidget("Profile Locked")
+              : toastWidget("Profile Unlocked");
+        },
+        child: Icon(
+          _userDetails.value!.isPrivate
+              ? Icons.lock_rounded
+              : Icons.lock_open_rounded,
+          color: _userDetails.value!.isPrivate ? Colors.red : Colors.green,
+          size: 30,
+        ),
+      ),
+    );
+    // return IconButton(
+    //     onPressed: () {
+    //       _userDetails.value!.isPrivate = !_userDetails.value!.isPrivate;
+    //       _databaseUser.updateUserData(_userDetails.value!);
+    //       _userDetails.value!.isPrivate
+    //           ? toastWidget("Profile Locked")
+    //           : toastWidget("Profile Unlocked");
+    //     },
+    //     icon: _userDetails.value!.isPrivate
+    //         ? const Icon(Icons.lock_rounded)
+    //         : const Icon(Icons.lock_open_rounded));
   }
 }
-
