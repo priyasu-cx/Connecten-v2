@@ -9,7 +9,6 @@ import 'package:hacknitr_round2/utils/fluttertoast.dart';
 import 'package:hacknitr_round2/utils/size_config.dart';
 import 'package:hacknitr_round2/widgets/appbar.dart';
 import 'package:hacknitr_round2/widgets/drawer.dart';
-import 'package:sliding_switch/sliding_switch.dart';
 
 class ProfileScreen extends StatelessWidget {
   const ProfileScreen({Key? key}) : super(key: key);
@@ -46,24 +45,7 @@ class ProfileScreen extends StatelessWidget {
                   ],
                 ),
               ),
-              Row(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  Padding(
-                    padding: EdgeInsets.only(right: screenWidth! * 0.05),
-                    child: Text(
-                      "My Links",
-                      style: TextStyle(
-                        letterSpacing: 1,
-                        fontSize: 20,
-                        fontWeight: FontWeight.w500,
-                      ),
-                      textAlign: TextAlign.left,
-                    ),
-                  ),
-                  LockButton(),
-                ],
-              ),
+              MyLinksWidget(),
               socialCard(context),
             ],
           ),
@@ -71,41 +53,47 @@ class ProfileScreen extends StatelessWidget {
   }
 }
 
-class LockButton extends ConsumerWidget {
-  const LockButton({Key? key}) : super(key: key);
+class MyLinksWidget extends ConsumerWidget {
+  const MyLinksWidget({
+    Key? key,
+  }) : super(key: key);
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final _userDetails = ref.watch(userDetailsProvider);
+    final _userDetails = ref.watch(userDetailsProvider).value;
     final _databaseUser = ref.watch(databaseProvider);
-    return Container(
-      child: InkWell(
-        onTap: () {
-          _userDetails.value!.isPrivate = !_userDetails.value!.isPrivate;
-          _databaseUser.updateUserData(_userDetails.value!);
-          _userDetails.value!.isPrivate
-              ? toastWidget("Profile Locked")
-              : toastWidget("Profile Unlocked");
-        },
-        child: Icon(
-          _userDetails.value!.isPrivate
-              ? Icons.lock_rounded
-              : Icons.lock_open_rounded,
-          color: _userDetails.value!.isPrivate ? Colors.red : Colors.green,
-          size: 30,
+    return Row(
+      mainAxisAlignment: MainAxisAlignment.center,
+      children: [
+        Padding(
+          padding: EdgeInsets.only(right: screenWidth! * 0.05),
+          child: const Text(
+            "My Links",
+            style: TextStyle(
+              letterSpacing: 1,
+              fontSize: 20,
+              fontWeight: FontWeight.w500,
+            ),
+            textAlign: TextAlign.left,
+          ),
         ),
-      ),
+        InkWell(
+          onTap: () {
+            _userDetails.isPrivate = !_userDetails.isPrivate;
+            _databaseUser.updateUserData(_userDetails);
+            _userDetails.isPrivate
+                ? toastWidget("Profile Locked")
+                : toastWidget("Profile Unlocked");
+          },
+          child: Icon(
+            _userDetails!.isPrivate
+                ? Icons.lock_rounded
+                : Icons.lock_open_rounded,
+            color: _userDetails.isPrivate ? Colors.red : Colors.green,
+            size: 30,
+          ),
+        ),
+      ],
     );
-    // return IconButton(
-    //     onPressed: () {
-    //       _userDetails.value!.isPrivate = !_userDetails.value!.isPrivate;
-    //       _databaseUser.updateUserData(_userDetails.value!);
-    //       _userDetails.value!.isPrivate
-    //           ? toastWidget("Profile Locked")
-    //           : toastWidget("Profile Unlocked");
-    //     },
-    //     icon: _userDetails.value!.isPrivate
-    //         ? const Icon(Icons.lock_rounded)
-    //         : const Icon(Icons.lock_open_rounded));
   }
 }

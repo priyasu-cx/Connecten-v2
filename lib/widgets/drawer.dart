@@ -172,14 +172,15 @@ class HeaderWidget extends ConsumerWidget {
     final _authUser = ref.watch(authUserProvider);
     return Container(
       child: Row(
+        mainAxisAlignment: MainAxisAlignment.center,
         children: [
           CircleAvatar(
-            radius: screenHeight! * 0.055,
-            backgroundImage: AssetImage(ImageAsset.applogo),
+            radius: screenWidth! * 0.1,
+            backgroundImage: const AssetImage(ImageAsset.applogo),
             foregroundImage: NetworkImage(_authUser.photoURL!),
           ),
           SizedBox(
-            width: screenHeight! * 0.03,
+            width: screenHeight! * 0.02,
           ),
           Flexible(
             child: Column(
