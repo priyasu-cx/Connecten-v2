@@ -1,16 +1,21 @@
 import 'dart:developer';
 
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:hacknitr_round2/Models/user_models.dart';
+import 'package:hacknitr_round2/Providers/database_provider.dart';
+import 'package:hacknitr_round2/Services/database_service.dart';
+import 'package:hacknitr_round2/widgets/profile_dialog.dart';
 import 'package:qr_code_scanner/qr_code_scanner.dart';
 
-class QRScan extends StatefulWidget {
+class QRScan extends ConsumerStatefulWidget {
   const QRScan({Key? key}) : super(key: key);
 
   @override
-  State<QRScan> createState() => _QRScanState();
+  ConsumerState<QRScan> createState() => _QRScanState();
 }
 
-class _QRScanState extends State<QRScan> {
+class _QRScanState extends ConsumerState<QRScan> {
   final GlobalKey qrKey = GlobalKey(debugLabel: 'QR');
   late QRViewController controller;
 
@@ -22,6 +27,10 @@ class _QRScanState extends State<QRScan> {
 
   @override
   Widget build(BuildContext context) {
+    final databaseUser = ref.watch(databaseProvider);
+    final userDetails = ref.watch(userDetailsProvider);
+
+
     return Scaffold(
       body: QRView(
         key: qrKey,
@@ -59,7 +68,12 @@ class _QRScanState extends State<QRScan> {
           content: Text(scanData.code!),
           actions: [
             TextButton(
-              onPressed: () => Navigator.pop(context),
+              onPressed: () {
+                final databaseUser = ref.read(userDetailsWithIdProvider(scanData.code!)).value;
+                ProfileDialog(databaseUser!, context);
+
+
+                Navigator.pop(context);},
               child: const Text('OK'),
             ),
           ],
@@ -67,4 +81,6 @@ class _QRScanState extends State<QRScan> {
       );
     });
   }
+
+
 }

@@ -26,10 +26,9 @@ class social extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-
     return GestureDetector(
         onTap: () {
-          UserModel userData = openDialog(image, text, index,context);
+          UserModel userData = openDialog(image, text, index, context);
           // _databaseUser.updateUserData(userData);
         },
         child: Container(
@@ -70,7 +69,6 @@ class social extends ConsumerWidget {
   }
 }
 
-
 class LinkDialog extends ConsumerWidget {
   final String text;
   final String image;
@@ -89,8 +87,7 @@ class LinkDialog extends ConsumerWidget {
     UserModel userDetails = _currentUser.value!;
     final myController = TextEditingController();
     return Dialog(
-        shape: RoundedRectangleBorder(
-            borderRadius: BorderRadius.circular(20)),
+        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(20)),
         child: Stack(
           clipBehavior: Clip.none,
           alignment: Alignment.topCenter,
@@ -116,34 +113,40 @@ class LinkDialog extends ConsumerWidget {
                             hintText: index == 1
                                 ? userDetails.linkedin
                                 : index == 2
-                                ? userDetails.github
-                                : index == 3
-                                ? userDetails.portfolio
-                                : userDetails.twitter),
+                                    ? userDetails.github
+                                    : index == 3
+                                        ? userDetails.portfolio
+                                        : userDetails.twitter),
                       ),
                       TextButton(
                           onPressed: () {
-                            Navigator.of(context).pop();
+                            if (hasValidUrl(myController.text)) {
+                              Navigator.pop(context);
 
-                            /// TODO: Add link to database
-                            // UserModel userDetails = _currentUser.value!;
-                            switch(index) {
-                              case 1:
-                                userDetails.linkedin = myController.text;
-                                break;
-                              case 2:
-                                userDetails.github = myController.text;
-                                break;
-                              case 3:
-                                userDetails.portfolio = myController.text;
-                                break;
-                              case 4:
-                                userDetails.twitter = myController.text;
-                                break;
+                              //Navigator.of(context).pop();
+
+                              /// TODO: Add link to database
+                              // UserModel userDetails = _currentUser.value!;
+                              switch (index) {
+                                case 1:
+                                  userDetails.linkedin = myController.text;
+                                  break;
+                                case 2:
+                                  userDetails.github = myController.text;
+                                  break;
+                                case 3:
+                                  userDetails.portfolio = myController.text;
+                                  break;
+                                case 4:
+                                  userDetails.twitter = myController.text;
+                                  break;
+                              }
+                              _databaseUser.updateUserData(userDetails);
+                            } else {
+                              toastWidget("Please enter a valid link");
                             }
-                            _databaseUser.updateUserData(userDetails);
 
-                            toastWidget("Link Added");
+                            // toastWidget("Link Added");
                           },
                           child: const Text(
                             'SUBMIT',
@@ -169,6 +172,16 @@ class LinkDialog extends ConsumerWidget {
           ],
         ));
   }
+
+  bool hasValidUrl(String value) {
+    String pattern =
+        r'(http|https)://[\w-]+(\.[\w-]+)+([\w.,@?^=%&amp;:/~+#-]*[\w@?^=%&amp;/~+#-])?';
+    RegExp regExp = new RegExp(pattern);
+    if (value.length == 0) {
+      return false;
+    } else if (!regExp.hasMatch(value)) {
+      return false;
+    }
+    return true;
+  }
 }
-
-
