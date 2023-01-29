@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:hacknitr_round2/Providers/auth_providers.dart';
+import 'package:hacknitr_round2/Providers/database_provider.dart';
 import 'package:hacknitr_round2/routes/route_path.dart';
 import 'package:hacknitr_round2/utils/assets.dart';
 import 'package:hacknitr_round2/utils/colors.dart';
@@ -15,6 +16,7 @@ class Menu extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final _authService = ref.watch(authServicesProvider);
+    final _userDetails = ref.watch(userDetailsProvider);
     return Drawer(
       child: Material(
         color: AppColor.secbgcolor,
@@ -55,6 +57,11 @@ class Menu extends ConsumerWidget {
               SizedBox(
                 height: screenHeight! * 0.03,
               ),
+              DrawerItem(
+                  name: 'Scan QR',
+                  icon: Icons.qr_code_scanner_rounded,
+                  onPressed: () => onItemPressed(context, index: 3)),
+
               // DrawerItem(
               //     name: 'Upcoming Events',
               //     icon: Icons.event_available,
@@ -75,7 +82,12 @@ class Menu extends ConsumerWidget {
                     Navigator.pushReplacementNamed(
                         context, RoutePath.routeToLoginScreen);
                   }),
-              SizedBox(height: screenHeight! * 0.18),
+
+              Padding(
+                padding: EdgeInsets.only(top: screenHeight! * 0.05, bottom:20),
+                child: Image.network("https://api.qrserver.com/v1/create-qr-code/?size=100x100&data=${_userDetails.value!.uid}"),
+              ),
+              Text("Scan to build connections", style: TextStyle(fontSize: 14),),
               Row(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
@@ -158,7 +170,7 @@ class Menu extends ConsumerWidget {
         break;
 
       case 3:
-        Navigator.pushReplacementNamed(context, RoutePath.routeToProfileScreen);
+        Navigator.pushNamed(context, RoutePath.routeToQRScreen);
         break;
     }
   }

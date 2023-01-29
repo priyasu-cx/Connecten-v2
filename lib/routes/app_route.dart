@@ -4,6 +4,7 @@ import 'package:hacknitr_round2/Handler/auth_handler.dart';
 import 'package:hacknitr_round2/NearbyConnectScreen/nearby_connect.dart';
 import 'package:hacknitr_round2/ProfileScreen/profile_screen.dart';
 import 'package:hacknitr_round2/SplashScreen/splash_screen.dart';
+import 'package:hacknitr_round2/qr_scanner/qrscanner.dart';
 import 'package:hacknitr_round2/routes/route_path.dart';
 
 abstract class AppRoute {
@@ -34,6 +35,10 @@ abstract class AppRoute {
 
       case RoutePath.routeToConnectionScreen:
         currentWidget = const Connections();
+        break;
+
+      case RoutePath.routeToQRScreen:
+        currentWidget = const QRScan();
         break;
 
       default:
