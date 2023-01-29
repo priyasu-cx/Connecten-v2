@@ -2,7 +2,12 @@ import 'package:flutter/material.dart';
 import 'package:hacknitr_round2/utils/size_config.dart';
 
 class DrawerItem extends StatelessWidget {
-  const DrawerItem({Key? key, required this.name, required this.icon, required this.onPressed}) : super(key: key);
+  const DrawerItem(
+      {Key? key,
+      required this.name,
+      required this.icon,
+      required this.onPressed})
+      : super(key: key);
 
   final String name;
   final IconData icon;
@@ -13,12 +18,21 @@ class DrawerItem extends StatelessWidget {
     return InkWell(
       onTap: onPressed,
       child: SizedBox(
-        height: screenHeight!*0.04,
+        height: screenHeight! * 0.04,
         child: Row(
           children: [
-            Icon(icon, size: 20, color: Colors.black,),
-            const SizedBox(width: 40,),
-            Text(name, style: const TextStyle(fontSize: 20, color: Colors.black),)
+            Icon(
+              icon,
+              size: 20,
+              color: Colors.black,
+            ),
+            const SizedBox(
+              width: 20,
+            ),
+            Text(
+              name,
+              style: const TextStyle(fontSize: 20, color: Colors.black),
+            )
           ],
         ),
       ),
